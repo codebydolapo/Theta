@@ -7,59 +7,20 @@ import { ReactNode } from 'react';
 
 
 interface Collection {
-    collection: {
-        // map(arg0: ({ description, image, name, value }: { description: any; image: any; name: any; value: any }) => JSX.Element, arg1: never[]): import("react").ReactNode
-        description: string,
-        image: string,
-        value: string,
-        name: string
-    }[]
+    // collection: {
+    //     description: string,
+    //     image: string,
+    //     value: string,
+    //     name: string
+    // }[]
 }
 
-// const collection: any = [
-//     {
-//     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.?",
-//     image: "/images/testApe.png",
-//     value: "2628",
-//     name: "26382",
-//     },
-//     {
-//     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.?",
-//     image: "/images/testApe.png",
-//     value: "2628",
-//     name: "26382",
-//     },
-//     {
-//     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.?",
-//     image: "/images/testApe.png",
-//     value: "2628",
-//     name: "26382",
-//     },
-//     {
-//     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.?",
-//     image: "/images/testApe.png",
-//     value: "2628",
-//     name: "26382",
-//     },
-//     {
-//     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.?",
-//     image: "/images/testApe.png",
-//     value: "2628",
-//     name: "26382",
-//     },
-//     {
-//     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.?",
-//     image: "/images/testApe.png",
-//     value: "2628",
-//     name: "26382",
-//     },
-// ]
 
-function CollectionsBody({ collection }: Collection) {
+function CollectionsBody() {
 
     
 
-    console.log(collection)
+    // console.log(collection)
 // function CollectionsBody() {
     return (
         <div className={`w-full min-h-[100vh] h-auto flex flex-col items-center`}>
@@ -281,7 +242,7 @@ function CollectionsBody({ collection }: Collection) {
                         </div>
                     </div>
                     <div className={`md:w-[80%] max-h-[33rem] h-auto flex flex-wrap items-center justify-around px-5 overflow-scroll xs:w-[100%] ${styles.itemsContainer}`}>
-                        {collection.map(({ description, image, name, value }: any, index) => {
+                        {/* {collection.map(({ description, image, name, value }: any, index) => {
                             return <Items
                                 description={description}
                                 image={image}
@@ -290,7 +251,7 @@ function CollectionsBody({ collection }: Collection) {
                                 key={index}
                                 index={index}
                             />
-                        })}
+                        })} */}
                     </div>
                 </div>
             </div>

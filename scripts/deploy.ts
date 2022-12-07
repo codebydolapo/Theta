@@ -22,9 +22,9 @@ async function main() {
     fs.writeFileSync("src/marketplaceAddress.js", `export const marketplaceAddress = "${marketplace.address}"`)
     
 
-    for(let i=0; i<13; i++){
+    for(let i=0; i<18; i++){
         let mintedMinter = await minter.mint(`../metadata/item${i}.json`, marketplace.address);
-        console.log(`Minter minted with hash ${mintedMinter.hash}`)
+        console.log(`NFT minted with hash ${mintedMinter.hash}`)
     }
 
 }
