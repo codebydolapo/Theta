@@ -1,8 +1,18 @@
 import Link from 'next/link'
 import styles from '../styles/landing.module.css'
 import LandingCards from './LandingCards'
+import {categories} from '../data/categories.js'
 
 function Landing() {
+
+    interface Props{
+        image: string,
+        name: string,
+        floorPrice: string,
+        index: string
+    }
+
+
     return (
         <div className={`w-full h-[100vh] ${styles.landing}`}>
             <div className={`w-full h-full flex flex-col ${styles.backdrop}`}>
@@ -10,21 +20,14 @@ function Landing() {
                     <h1 className={`text-5xl font-bold`}>Explore, Collect And Sell NFTs</h1>
                 </div>
                 <div className={`w-full h-[80%] flex items-center overflow-x-scroll`}>
-                    <LandingCards 
-                        image = {'/nfts/nft1.png'}
+                    {categories.map(({image, name, index, floorPrice}: Props)=>{
+                        return <LandingCards 
+                        image = {image}
+                        name = {name}
+                        key = {index}
+                        floorPrice = {floorPrice}
                     />
-                    <LandingCards 
-                        image = {'/nfts/nft2.png'}
-                    />
-                    <LandingCards 
-                        image = {'/nfts/nft3.png'}
-                    />
-                    <LandingCards 
-                        image = {'/nfts/nft4.png'}
-                    />
-                    <LandingCards 
-                        image = {'/nfts/nft5.png'}
-                    />
+                    })}
                 </div>
                 {/* <div className={`md:w-1/2 md:h-full flex items-center justify-center md:pb-0 xs:w-[100vw] xs:min-h-[50vh] md:my-0 xs:my-5 xs:mb-7 xs:pb-8`}>
                     <div className={`w-full min-h-[40%] h-auto flex flex-col md:mb-0 md:items-start justify-center md:pl-10 xs:mb-5 xs:items-center`}>
