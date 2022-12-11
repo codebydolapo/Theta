@@ -28,27 +28,27 @@ function Navbar() {
             </div>
             <div className={`w-[45%] h-full flex md:justify-center xs:justify-end`}>
                 <div className={`md:w-[75%] h-full flex justify-between xs:w-0`}>
+                    <div className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}>
+                        <h1 className={`md:text-[0.9rem] hover:scale-[102%] ease font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>HOME</h1>
+                    </div>
                     <Link href='/collections/something'>
                         <div className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}>
-                            <h1 className={`md:text-[0.9rem] font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>COLLECTION</h1>
+                            <h1 className={`md:text-[0.9rem] hover:scale-[102%] ease font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>COLLECTION</h1>
                         </div>
                     </Link>
                     <div className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}>
-                        <h1 className={`md:text-[0.9rem] font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>STATS</h1>
+                        <h1 className={`md:text-[0.9rem] hover:scale-[102%] ease font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>CREATE</h1>
                     </div>
-                    <div className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}>
-                        <h1 className={`md:text-[0.9rem] font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>RESOURCES</h1>
-                    </div>
-                    <div className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}>
+                    {/* <div className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}>
                         <h1 className={`md:text-[0.9rem] font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>CREATE</h1>
-                    </div>
+                    </div> */}
                 </div>
                 <div className={`md:w-[25%] h-full flex md:mx-0 xs:mx-2 xs:w-[5rem] `}>
                     <div className={`md:w-1/2 h-full flex items-center justify-center cursor-pointer xs:w-[2rem] xs:mx-1`}>
-                        <UserCircleIcon className={`w-[2.5rem] text-[#1c1e21e0]`}/>
+                        <UserCircleIcon className={`w-[2.5rem] hover:scale-[110%] ease-in-out text-[#1c1e21e0]`}/>
                     </div>
                     <div className={`md:w-1/2 h-full flex items-center justify-center cursor-pointer xs:w-[2rem] xs:mx-1`}>
-                        <CreditCardIcon className={`w-[2.5rem] text-[#1c1e21e0]`}/>
+                        <CreditCardIcon className={`w-[2.5rem] hover:scale-[110%] ease-in-out text-[#1c1e21e0]`}/>
                     </div>
                 </div>
             </div>
