@@ -10,7 +10,7 @@ function Navbar() {
     // const address = useAddress()
 
     return (
-        <div className={`w-full h-[60px] flex flex-row space-between`}>
+        <div className={`w-full h-[60px] flex flex-row space-between md:pl-[4rem] md:pr-[2rem]`}>
             <div className={`w-[55%] h-full flex items-center justify-between`}>
                 <div className={`md:w-[30%] h-full flex items-center md:justify-center xs:w-[100%] xs:justify-start`}>
                     <img className={`md:w-[40px] h-[40px] rounded-full md:mx-2 xs:w-[40px] xs:h-[40px] xs:mx-1`} alt='' src='/icons/logo.jpg' />
@@ -29,15 +29,15 @@ function Navbar() {
             <div className={`w-[45%] h-full flex md:justify-center xs:justify-end`}>
                 <div className={`md:w-[75%] h-full flex justify-between xs:w-0`}>
                     <div className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}>
-                        <h1 className={`md:text-[0.9rem] hover:scale-[102%] ease font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>HOME</h1>
+                        <h1 className={`lg:text-[0.9rem] hover:scale-[102%] ease font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>HOME</h1>
                     </div>
                     <Link href='/collections/something'>
                         <div className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}>
-                            <h1 className={`md:text-[0.9rem] hover:scale-[102%] ease font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>COLLECTION</h1>
+                            <h1 className={`lg:text-[0.9rem] hover:scale-[102%] ease font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>Marketplace</h1>
                         </div>
                     </Link>
                     <div className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}>
-                        <h1 className={`md:text-[0.9rem] hover:scale-[102%] ease font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>CREATE</h1>
+                        <h1 className={`lg:text-[0.9rem] hover:scale-[102%] ease font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>CREATE</h1>
                     </div>
                     {/* <div className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}>
                         <h1 className={`md:text-[0.9rem] font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>CREATE</h1>

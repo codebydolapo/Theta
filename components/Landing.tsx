@@ -16,10 +16,10 @@ function Landing() {
     return (
         <div className={`w-full h-[100vh] ${styles.landing}`}>
             <div className={`w-full h-full flex flex-col ${styles.backdrop}`}>
-                <div className={`w-full h-[20%] flex items-center justify-center `}>
-                    <h1 className={`text-5xl font-bold`}>Explore, Collect And Sell NFTs</h1>
+                <div className={`w-full md:h-[20%] flex items-center justify-center xs:h-[10%]`}>
+                    <h1 className={`md:text-4xl font-bold xs:text-2xl`}>Explore, Collect And Sell NFTs</h1>
                 </div>
-                <div className={`w-full h-[80%] flex items-center overflow-x-scroll`}>
+                <div className={`w-full h-[80%] flex lg:flex-row items-center overflow-x-scroll xs:flex-col x:justify-around overflow-scroll`}>
                     {categories.map(({image, name, index, floorPrice}: Props)=>{
                         return <LandingCards 
                         image = {image}

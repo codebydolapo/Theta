@@ -20,19 +20,19 @@ export const categories = [
     {
         name: "Architecture",
         floorPrice: "4",
-        image: "/categories/digitalArt.png",
+        image: "/categories/architecture.jpg",
         index: ""
     },
     {
         name: "0xDolapo's Blogs",
         floorPrice: "2",
-        image: "/nfts/nft5.png",
+        image: "/categories/blogs.png",
         index: ""
     },
     {
         name: "Repos",
         floorPrice: "6",
-        image: "/nfts/nft7.png",
+        image: "/categories/repos.jpeg",
         index: ""
     }
 ]
