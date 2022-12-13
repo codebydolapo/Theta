@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import styles from '../styles/landing.module.css'
 import LandingCards from './LandingCards'
-import {categories} from '../data/categories.js'
+import { categories } from '../data/categories.js'
 
 function Landing() {
 
-    interface Props{
+    interface Props {
         image: string,
         name: string,
         floorPrice: string,
@@ -19,16 +19,18 @@ function Landing() {
                 <div className={`w-full md:h-[20%] flex items-center justify-center xs:h-[10%]`}>
                     <h1 className={`md:text-4xl font-bold xs:text-2xl`}>Explore, Collect And Sell NFTs</h1>
                 </div>
-                <div className={`w-full h-[80%] flex lg:flex-row items-center overflow-x-scroll xs:flex-col x:justify-around overflow-scroll`}>
-                    {categories.map(({image, name, index, floorPrice}: Props)=>{
-                        return <LandingCards 
-                        image = {image}
-                        name = {name}
-                        key = {index}
-                        floorPrice = {floorPrice}
-                    />
-                    })}
-                </div>
+                <Link href="/marketplace">
+                    <div className={`w-full h-[80%] flex lg:flex-row items-center overflow-x-scroll xs:flex-col x:justify-around overflow-scroll`}>
+                        {categories.map(({ image, name, index, floorPrice }: Props) => {
+                            return <LandingCards
+                                image={image}
+                                name={name}
+                                key={index}
+                                floorPrice={floorPrice}
+                            />
+                        })}
+                    </div>
+                </Link>
                 {/* <div className={`md:w-1/2 md:h-full flex items-center justify-center md:pb-0 xs:w-[100vw] xs:min-h-[50vh] md:my-0 xs:my-5 xs:mb-7 xs:pb-8`}>
                     <div className={`w-full min-h-[40%] h-auto flex flex-col md:mb-0 md:items-start justify-center md:pl-10 xs:mb-5 xs:items-center`}>
                         <h1 className={`text-white tracking-wider text-8xl font-extrabold my-2 border-b-[5px] border-white ${styles.title}`}><b className={`text-[#1877f2]`}>E</b>nefti</h1>
