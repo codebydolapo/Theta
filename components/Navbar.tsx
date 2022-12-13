@@ -1,13 +1,67 @@
 import { UserCircleIcon, CreditCardIcon, SearchIcon, XIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
+import { ethers } from 'hardhat'
+import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { saveAccount } from './reducers/action'
+import {marketplaceAddress} from '../src/marketplaceAddress'
+import {minterAddress} from '../src/minterAddress'
+import minterABI from '../artifacts/contracts/Minter.sol/Minter.json'
+import marketplaceABI from '../artifacts/contracts/Marketplace.sol/Marketplace.json'
+import { saveMarketplaceContract, saveMinterContract } from './reducers/action'
 // import { useDisconnect, useAddress, useMetamask } from '@thirdweb-dev/react'
 
 
 function Navbar() {
 
-    // const disconnect = useDisconnect()
-    // const connect = useMetamask()
-    // const address = useAddress()
+
+
+    const dispatch = useDispatch()
+
+    const [connectSwitch, setconnectSwitch] = useState(false)
+    const [account, setAccount] = useState("")
+    // const [network, setNetwork] = useState("")
+
+
+
+    useEffect(() => {
+        let Window: any = window
+        if (connectSwitch && Window.ethereum !== undefined) {
+
+            let provider = Window.ethereum
+            let ethersProvider = new ethers.providers.Web3Provider(provider);
+
+            Window.ethereum.request({ method: "eth_requestAccounts" })
+                .then((accounts: any) => {
+                    setAccount(accounts[0])
+                    dispatch(saveAccount(accounts[0]))
+                    console.log(accounts[0])
+                })
+                .catch((err: any) => console.log(err))
+
+            let signer = ethersProvider.getSigner()
+
+            const minter: any = new ethers.Contract(minterAddress, minterABI.abi, signer)
+            const marketplace: any = new ethers.Contract(marketplaceAddress, marketplaceABI.abi, signer)
+
+
+            if (marketplace) {
+                dispatch(saveMarketplaceContract(marketplace))
+                dispatch(saveMinterContract(minter))
+            }
+
+        } else if (connectSwitch && Window.ethereum == undefined) {
+            alert("Please Download Metamask")
+        }
+        setconnectSwitch(false)
+    }, [connectSwitch])
+
+
+
+    function connectMetamask() {
+        setconnectSwitch(true)
+    }
+
 
     return (
         <div className={`w-full h-[60px] flex flex-row space-between md:pl-[4rem] md:pr-[2rem]`}>
@@ -48,7 +102,7 @@ function Navbar() {
                         <UserCircleIcon className={`w-[2.5rem] hover:scale-[110%] ease-in-out text-[#1c1e21e0]`}/>
                     </div>
                     <div className={`md:w-1/2 h-full flex items-center justify-center cursor-pointer xs:w-[2rem] xs:mx-1`}>
-                        <CreditCardIcon className={`w-[2.5rem] hover:scale-[110%] ease-in-out text-[#1c1e21e0]`}/>
+                        <CreditCardIcon className={`w-[2.5rem] hover:scale-[110%] ease-in-out text-[#1c1e21e0]`} onClick = {connectMetamask}/>
                     </div>
                 </div>
             </div>

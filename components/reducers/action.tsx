@@ -17,3 +17,24 @@ export const changeCategory = (category: any)=>{
         category
     }
 }
+
+export const saveAccount = (account: any)=>{
+    return{
+        type: "SAVE_ACCOUNT",
+        account
+    }
+}
+
+export const saveMarketplaceContract = (contractInstance: any)=>{
+    return{
+        type: "SAVE_MARKETPLACE_CONTRACT",
+        contractInstance
+    }
+}
+
+export const saveMinterContract = (contractInstance: any)=>{
+    return{
+        type: "SAVE_MINTER_CONTRACT",
+        contractInstance
+    }
+}

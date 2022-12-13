@@ -1,27 +1,19 @@
 import styles from '../styles/collectionsbody.module.css'
 import { GlobeAltIcon, StarIcon, ShareIcon, DotsHorizontalIcon, SortAscendingIcon, SearchIcon, ViewGridIcon, ViewGridAddIcon, ChartSquareBarIcon, ChevronDownIcon } from '@heroicons/react/outline'
-import Items from './Items'
-import { ReactNode } from 'react';
+import { useSelector } from 'react-redux'
 
 
 
 
-interface Collection {
-    // collection: {
-    //     description: string,
-    //     image: string,
-    //     value: string,
-    //     name: string
-    // }[]
-}
+
 
 
 function CollectionsBody() {
 
-    
+    const category = useSelector((state: any)=>{return state.category})
 
-    // console.log(collection)
-// function CollectionsBody() {
+
+
     return (
         <div className={`w-full min-h-[100vh] h-auto flex flex-col items-center`}>
 

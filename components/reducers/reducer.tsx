@@ -31,6 +31,37 @@ export const category = (state = '', action: {type: string, category: string})=>
     }
 }
 
+export const account = (state = "", action: {type: string, account: any} )=>{
+    switch(action.type){
+        case "SAVE_ACCOUNT":
+            return state = action.account
+        default:
+            return state
+    }
+}
+
+export const marketplaceContract = (state = "", action: {type: string, contractInstance: any})=>{
+    switch(action.type){
+        case "SAVE_MARKETPLACE_CONTRACT":
+            return state = action.contractInstance
+        default:
+            return state
+    }
+}
+
+export const minterContract = (state = [], action: {type: string, contractInstance: any})=>{
+    switch(action.type){
+        case "SAVE_MINTER_CONTRACT":
+            return state = action.contractInstance
+        default:
+            return state
+    }
+}
+
+
 export const allReducers = combineReducers({
-    category
+    category,
+    account,
+    marketplaceContract,
+    minterContract
 })

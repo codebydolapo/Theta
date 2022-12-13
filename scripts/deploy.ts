@@ -18,7 +18,7 @@ async function main() {
     console.log(`Minter delivered to Marketplace at ${marketplace.address}`);
 
     // fs.writeFileSync("src/MinterAddress.txt", Minter.address)
-    fs.writeFileSync("src/minterAddress.js", `export const nftAddress = "${minter.address}"`)
+    fs.writeFileSync("src/minterAddress.js", `export const minterAddress = "${minter.address}"`)
     fs.writeFileSync("src/marketplaceAddress.js", `export const marketplaceAddress = "${marketplace.address}"`)
     
     for(let i=0; i<8; i++){
