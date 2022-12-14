@@ -1,6 +1,6 @@
 import { UserCircleIcon, CreditCardIcon, SearchIcon, XIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
-import { ethers } from 'hardhat'
+import { ethers } from 'ethers'
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { saveAccount } from './reducers/action'
