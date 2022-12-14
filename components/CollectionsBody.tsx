@@ -2,6 +2,8 @@ import styles from '../styles/collectionsbody.module.css'
 import { GlobeAltIcon, StarIcon, ShareIcon, DotsHorizontalIcon, SortAscendingIcon, SearchIcon, ViewGridIcon, ViewGridAddIcon, ChartSquareBarIcon, ChevronDownIcon } from '@heroicons/react/outline'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react';
+import Items from './Items';
+import {digitalArt} from '../data/digitalArt.js'
 
 
 
@@ -14,10 +16,12 @@ function CollectionsBody() {
     let randomNumber;
 
     useEffect(()=>{
-        randomNumber = Math.floor(Math.random() * 1000)
-    })
+        randomNumber = ()=> {return Math.floor(Math.random() * 1000)}
+    }, [])
 
     const category = useSelector((state: any) => { return state.category })
+
+    console.log(category)
 
 
 
@@ -62,19 +66,15 @@ function CollectionsBody() {
 
                 {/* nft collection title up */}
 
-                {/* <div className={`w-full md:h-[6rem] flex flex-col items-start justify-center my-2 md:px-5 xs:min-h-[5rem] xs:px-2`}>
-                    <h1 className={`md:text-[1.3rem] text-[#353840] overflow-hidden xs:text-[0.75rem]`}>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.</h1>
-                    <h1 className={`md:text-[1rem] text-[#000000c2] xs:text-[0.75rem]`}>See More</h1>
-                </div> */}
-                <div className={`w-full md:min-h-[2rem] md:h-auto md:mb-2 flex flex-row items-center justify-start md:px-5 xs:min-h-[2rem] xs:px-2 overflow-x-scroll`}>
+                <div className={`w-full md:min-h-[2rem] md:h-auto md:mb-2 flex flex-row items-center justify-start md:px-5 xs:min-h-[2rem] xs:px-2 overflow-x-scroll ${styles.detailDiv}`}>
                     <div className={`min-w-[5rem] w-auto h-[2rem] md:mr-7 flex items-end justify-start`}>
-                        <h1 className={`md:text-[1rem] text-[#353840] overflow-hidden xs:text-[0.75rem]`}>Items<b className = {`text-[#3578e5]`}>Items</b>: {randomNumber}</h1>
+                        <h1 className={`md:text-[1rem] text-[#353840] overflow-hidden xs:text-[0.75rem]`}>Items<b className = {`text-[#3578e5]`}>: {randomNumber}</b></h1>
                     </div>
                     <div className={`md:min-w-[5rem] w-auto h-[2rem] mr-7 flex items-end justify-start xs:min-w-[9rem]`}>
-                        <h1 className={`md:text-[1rem] text-[#353840] overflow-hidden xs:text-[0.75rem]`}>Created<b className = {`text-[#3578e5]`}>: December 2022</b></h1>
+                        <h1 className={`md:text-[1rem] text-[#353840] overflow-hidden xs:text-[0.75rem]`}>Created<b>: December 2022</b></h1>
                     </div>
                     <div className={`md:min-w-[5rem] w-auto h-[2rem] md:mr-7 flex items-end justify-start xs:min-w-[9rem]`}>
-                        <h1 className={`md:text-[1rem] text-[#353840] overflow-hidden xs:text-[0.75rem]`}>Creator Fee<b className = {`text-[#3578e5]`}>: 0%</b></h1>
+                        <h1 className={`md:text-[1rem] text-[#353840] overflow-hidden xs:text-[0.75rem]`}>Creator Fee<b>: 0%</b></h1>
                     </div>
                     <div className={`md:min-w-[5rem] w-auto h-[2rem] md:mr-7 flex items-end justify-start xs:min-w-[9rem]`}>
                         <h1 className={`md:text-[1rem] text-[#353840] overflow-hidden xs:text-[0.75rem]`}>Chain<b className = {`text-[#3578e5]`}>: Goerli</b></h1>
@@ -84,7 +84,7 @@ function CollectionsBody() {
 
                 {/* nft collection description up */}
 
-                <div className={`w-full md:h-[3rem] flex flex-row items-center justify-start md:mt-10 md:px-3 xs:px-1 xs-min-h-[3rem] xs:h-[3rem] xs:mt-5`}>
+                <div className={`w-full md:h-[3rem] flex flex-row items-center justify-start md:mt-10 md:px-3 xs:px-1 xs-min-h-[2rem] xs:h-[2.5rem] xs:mt-5`}>
 
                     <div className={`md:min-w-[5rem] md:w-auto pr-2 h-full md:mx-3 flex flex-col items-start justify-between xs:min-w-[6rem] xs:w-auto `}>
                         <h1 className={`md:text-xl text-[#3578e5] font-extrabold xs:text-base`}>20</h1>
@@ -179,93 +179,17 @@ function CollectionsBody() {
                 {/* nft collection display settings up */}
 
                 <div className={`w-full min-h-[70vh] h-auto flex`}>
-                    {/* <div className={`md:w-[20%] min-h-[12rem] max-h-[33rem] h-full flex flex-col xs:w-0`}>
-
-                        <div className={`w-full h-[40%] flex flex-col items-center justify-around my-5`}>
-                            <div className={`w-full h-[3rem] flex flex-row items-center justify-around`}>
-                                <div className={`w-[80%] h-full flex items-center justify-start pl-5 `}>
-                                    <h1 className={`font-bold md:text-[0.9rem] xs:text-[0rem]`}>Status</h1>
-                                </div>
-                                <div className={`w-[20%] h-full flex items-center justify-center`}>
-                                    <ChevronDownIcon className={`w-[1.5rem] h-auto text-[#000000be] font-bold`} />
-                                </div>
-                            </div>
-
-                            <div className={`w-full h-[3rem] flex items-center justify-start pl-5 `}>
-                                <h1 className={`text-[#000000b3] md:text-[0.9rem] xs:text-[0rem]`}>Status</h1>
-                            </div>
-                            <div className={`w-full h-[3rem] flex items-center justify-start pl-5`}>
-                                <h1 className={`text-[#000000b3] md:text-[0.9rem] xs:text-[0rem]`}>Status</h1>
-                            </div>
-                            <div className={`w-full h-[3rem] flex items-center justify-start pl-5`}>
-                                <h1 className={`text-[#000000b3] md:text-[0.9rem] xs:text-[0rem]`}>Status</h1>
-                            </div>
-
-                        </div>
-
-                        <div className={`w-full h-[30%] flex flex-col items-center justify-around my-5`}>
-
-                            <div className={`w-full h-[3rem] flex flex-row items-center justify-around `}>
-                                <div className={`w-[80%] h-full flex items-center justify-start pl-5`}>
-                                    <h1 className={`font-bold md:text-[0.9rem] xs:text-[0rem]`}>Price</h1>
-                                </div>
-                                <div className={`w-[20%] h-full flex items-center justify-center`}>
-                                    <ChevronDownIcon className={`w-[1.5rem] h-auto text-[#000000be] font-bold`} />
-                                </div>
-                            </div>
-
-                            <div className={`w-full h-[3rem] flex flex-row items-center justify-around `}>
-                                <div className={`w-[80%] h-full flex items-center justify-start pl-5`}>
-                                    <h1 className={`font-bold md:text-[0.9rem] xs:text-[0rem]`}>Quantity</h1>
-                                </div>
-                                <div className={`w-[20%] h-full flex items-center justify-center`}>
-                                    <ChevronDownIcon className={`w-[1.5rem] h-auto text-[#000000be] font-bold`} />
-                                </div>
-                            </div>
-
-                            <div className={`w-full h-[3rem] flex flex-row items-center justify-around `}>
-                                <div className={`w-[80%] h-full flex items-center justify-start pl-5`}>
-                                    <h1 className={`font-bold md:text-[0.9rem] xs:text-[0rem]`}>Currency</h1>
-                                </div>
-                                <div className={`w-[20%] h-full flex items-center justify-center`}>
-                                    <ChevronDownIcon className={`w-[1.5rem] h-auto text-[#000000be] font-bold`} />
-                                </div>
-                            </div>
-
-                        </div>
-                        <div className={`w-full h-[20%] flex flex-col items-center justify-around mt-5`}>
-
-                            <div className={`w-full h-[3rem] flex flex-row items-center justify-around `}>
-                                <div className={`w-[80%] h-full flex items-center justify-start pl-5 `}>
-                                    <h1 className={`font-bold md:text-[0.9rem] xs:text-[0rem]`}>Background</h1>
-                                </div>
-                                <div className={`w-[20%] h-full flex items-center justify-center`}>
-                                    <ChevronDownIcon className={`w-[1.5rem] h-auto text-[#000000be] font-bold`} />
-                                </div>
-                            </div>
-
-                            <div className={`w-full h-[3rem] flex flex-row items-center justify-around`}>
-                                <div className={`w-[80%] h-full flex items-center justify-start pl-5`}>
-                                    <h1 className={`font-bold md:text-[0.9rem] xs:text-[0rem]`}>Clothes</h1>
-                                </div>
-                                <div className={`w-[20%] h-full flex items-center justify-center`}>
-                                    <ChevronDownIcon className={`w-[1.5rem] h-auto text-[#000000be] font-bold`} />
-                                </div>
-                            </div>
-
-                        </div>
-                    </div> */}
-                    <div className={`md:w-[100%] max-h-[33rem] h-auto flex flex-wrap items-center justify-around px-5 overflow-scroll xs:w-[100%] ${styles.itemsContainer}`}>
-                        {/* {collection.map(({ description, image, name, value }: any, index) => {
+                    <div className={`md:w-[100%] min-h-[33rem] h-auto flex flex-wrap items-center justify-around px-5 xs:w-[100%] ${styles.itemsContainer}`}>
+                        {digitalArt.map(({ description, image, name, value, index, price }: any) => {
                             return <Items
                                 description={description}
                                 image={image}
                                 name={name}
-                                value={value}
                                 key={index}
                                 index={index}
+                                price = {price}
                             />
-                        })} */}
+                        })}
                     </div>
                 </div>
             </div>

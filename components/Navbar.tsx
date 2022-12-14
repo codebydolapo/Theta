@@ -3,12 +3,12 @@ import Link from 'next/link'
 import { ethers } from 'ethers'
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { saveAccount } from './reducers/action'
-import {marketplaceAddress} from '../src/marketplaceAddress'
-import {minterAddress} from '../src/minterAddress'
+// import { saveAccount } from './reducers/action'
+import { marketplaceAddress } from '../src/marketplaceAddress'
+import { minterAddress } from '../src/minterAddress'
 import minterABI from '../artifacts/contracts/Minter.sol/Minter.json'
 import marketplaceABI from '../artifacts/contracts/Marketplace.sol/Marketplace.json'
-import { saveMarketplaceContract, saveMinterContract } from './reducers/action'
+import { saveMarketplaceContract, saveMinterContract, saveAccount } from './reducers/action'
 // import { useDisconnect, useAddress, useMetamask } from '@thirdweb-dev/react'
 
 
@@ -27,6 +27,10 @@ function Navbar() {
     useEffect(() => {
         let Window: any = window
         if (connectSwitch && Window.ethereum !== undefined) {
+            setAccount("")
+            dispatch(saveAccount(""))
+            dispatch(saveMarketplaceContract(""))
+            dispatch(saveMinterContract(""))
 
             let provider = Window.ethereum
             let ethersProvider = new ethers.providers.Web3Provider(provider);
@@ -48,6 +52,8 @@ function Navbar() {
             if (marketplace) {
                 dispatch(saveMarketplaceContract(marketplace))
                 dispatch(saveMinterContract(minter))
+                // console.log(marketplace)
+                // console.log(account)
             }
 
         } else if (connectSwitch && Window.ethereum == undefined) {
@@ -68,7 +74,7 @@ function Navbar() {
             <div className={`w-[55%] h-full flex items-center justify-between`}>
                 <div className={`md:w-[30%] h-full flex items-center md:justify-center xs:w-[100%] xs:justify-start`}>
                     <img className={`md:w-[40px] h-[40px] rounded-full md:mx-2 xs:w-[40px] xs:h-[40px] xs:mx-1`} alt='' src='/icons/logo.jpg' />
-                    <h1 className={`font-extrabold md:text-5xl text-[#1c1e21ea] xs:text-2xl`}><b className = {`text-[#1877f2]`}>E</b>nefti</h1>
+                    <h1 className={`font-extrabold md:text-5xl text-[#1c1e21ea] xs:text-2xl`}><b className={`text-[#1877f2]`}>E</b>nefti</h1>
                 </div>
                 <div className={`w-[67%] h-[80%] flex items-center justify-between border-2 border-grey rounded-lg md:visible xs:hidden`}>
                     <div className={`w-[3rem] h-full flex justify-center items-center cursor-pointer`}>
@@ -97,13 +103,16 @@ function Navbar() {
                         <h1 className={`md:text-[0.9rem] font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>CREATE</h1>
                     </div> */}
                 </div>
-                <div className={`md:w-[25%] h-full flex md:mx-0 xs:mx-2 xs:w-[5rem] `}>
-                    <div className={`md:w-1/2 h-full flex items-center justify-center cursor-pointer xs:w-[2rem] xs:mx-1`}>
-                        <UserCircleIcon className={`w-[2.5rem] hover:scale-[110%] ease-in-out text-[#1c1e21e0]`}/>
-                    </div>
-                    <div className={`md:w-1/2 h-full flex items-center justify-center cursor-pointer xs:w-[2rem] xs:mx-1`}>
-                        <CreditCardIcon className={`w-[2.5rem] hover:scale-[110%] ease-in-out text-[#1c1e21e0]`} onClick = {connectMetamask}/>
-                    </div>
+                <div className={`md:w-[25%] h-full flex md:mx-0 xs:mx-2 xs:w-full justify-center items-center `}>
+                    {account !== "" ?
+                        <div className={`w-[12rem] md:h-[45px] bg-[#1266e4] rounded-lg xs:h-[45px] xs:w-[100%] flex justify-center items-around`} onClick={connectMetamask}>
+                            <h1 className={`text-white lg:text-base xs:text-sm flex justify-center items-center`}>{`${account.slice(0, 6)}...${account.slice(38, 42)}`}</h1>
+                        </div> 
+                        :
+                        <div className={`w-[12rem] md:h-[45px] bg-[#1266e4] rounded-lg xs:h-[45px] xs:w-[100%] flex justify-center items-around`} onClick={connectMetamask}>
+                            <h1 className={`text-white lg:text-base xs:text-sm flex justify-center items-center`}>Connect Wallet</h1>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

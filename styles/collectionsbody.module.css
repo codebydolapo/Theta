@@ -11,3 +11,7 @@
 .itemsContainer::-webkit-scrollbar{
     display: none
 }
+
+.detailDiv::-webkit-scrollbar{
+    display: none
+}
