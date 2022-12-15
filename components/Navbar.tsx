@@ -56,9 +56,6 @@ function Navbar() {
                 dispatch(saveMinterContract(minter))
                 // console.log(marketplace)
                 // console.log(account)
-                marketplace.getTokenURL(1).then((data: any)=>{
-                    console.log(data)
-                })
             }
 
         } else if (connectSwitch && Window.ethereum == undefined) {

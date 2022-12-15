@@ -33,10 +33,15 @@ function Checkout() {
     const account = useSelector((state: {account: string})=>{return state.account})
 
     async function handlePurchase(){
-        const buyReceipt = await marketplace.buyNFT(marketplaceAddress, account, index)
-        const payReceipt = await marketplace.pay(account, { value: etherToWei(price) })
-        console.log(buyReceipt)
-        console.log(payReceipt)
+        if(account){
+            const buyReceipt = await marketplace.buyNFT(marketplaceAddress, account, index)
+            const payReceipt = await marketplace.pay(account, { value: etherToWei(price) })
+            console.log(buyReceipt)
+            console.log(payReceipt)
+        }
+        else{
+            alert("Please Connect Wallet")
+        }
     }
 
     function closePopup(){
@@ -46,13 +51,13 @@ function Checkout() {
    
 
     return (
-        <div className={`w-[95%] md:max-h-[90vh] h-auto flex md:flex-row bg-white xs:flex-col xs:min-h-[98vh] absolute rounded-lg top-[50px] left-auto ${styles.checkout}`}>
+        <div className={`w-[95%] md:max-h-[90vh] h-auto flex md:flex-row md:top-[5vh] bg-white xs:flex-col xs:min-h-[98vh] absolute rounded-lg xs:top-[50px] left-auto ${styles.checkout}`}>
 
             <div className={`md:w-[40%] md:h-[100vh] flex justify-center md:items-start pt-10 xs:w-[100%] xs:mb-4 xs:items-center`}>
                 <img className={`w-[90%] h-auto rounded-xl`} alt='' src={image} />
             </div>
 
-            <div className={`md:w-[60%] md:h-[100vh] flex flex-col items-center md:justify-start pt-10 xs:w-[100%] xs:h-[80vh] xs:overflow-scroll xs:justify-center`}>
+            <div className={`md:w-[60%] md:h-[100vh] flex flex-col items-center md:justify-start pt-10 xs:w-[100%] xs:h-[80vh] xs:overflow-scroll xs:justify-center ${styles.checkoutDetails}`}>
 
                 <div className={`w-full h-[12%] flex flex-row items-center justify-between`}>
                     <div className={`w-[50%] h-full flex px-5 justify-start items-center`}>
@@ -108,7 +113,7 @@ function Checkout() {
                         </div>
 
                         <div className={`w-full h-[60%] bg-[#f5f5f5] px-5 flex justify-start items-center`}>
-                            <div className={`w-[12rem] h-[4rem] border-2 border-grey rounded-xl mr-2 bg-[#0664f0] flex items-center justify-center`}  onClick = {handlePurchase}>
+                            <div className={`w-[12rem] h-[4rem] border-2 border-grey rounded-xl mr-2 bg-[#0664f0] flex items-center justify-center cursor-pointer`}  onClick = {handlePurchase}>
                                 <CashIcon className={`text-white w-9 mr-2`} />
                                 <h1 className={`text-white text-base font-bold`}>Buy Now</h1>
                             </div>
