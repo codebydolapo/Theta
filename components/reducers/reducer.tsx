@@ -1,4 +1,6 @@
 import { combineReducers } from "redux"
+// import { Marketplace } from '../../typechain-types/contracts/Marketplace'
+// import { Minter } from '../../typechain-types/contracts/Minter'
 
 // interface Actions{
 //     type: string,
@@ -40,19 +42,19 @@ export const account = (state = "", action: {type: string, account: any} )=>{
     }
 }
 
-export const marketplaceContract = (state = "", action: {type: string, contractInstance: any})=>{
+export const marketplaceContract= (state: any | undefined = "", action: {type: string, contractInstance: any | undefined})=>{
     switch(action.type){
         case "SAVE_MARKETPLACE_CONTRACT":
-            return state = action.contractInstance
+            return state = action.contractInstance;
         default:
             return state
     }
 }
 
-export const minterContract = (state = [], action: {type: string, contractInstance: any})=>{
+export const minterContract = (state: any | undefined = "", action: {type: string, contractInstance: any | undefined})=>{
     switch(action.type){
         case "SAVE_MINTER_CONTRACT":
-            return state = action.contractInstance
+            return state = action.contractInstance;
         default:
             return state
     }

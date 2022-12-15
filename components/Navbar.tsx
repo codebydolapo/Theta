@@ -9,6 +9,8 @@ import { minterAddress } from '../src/minterAddress'
 import minterABI from '../artifacts/contracts/Minter.sol/Minter.json'
 import marketplaceABI from '../artifacts/contracts/Marketplace.sol/Marketplace.json'
 import { saveMarketplaceContract, saveMinterContract, saveAccount } from './reducers/action'
+// import { Marketplace } from '../typechain-types/contracts/Marketplace'
+// import { Minter } from '../typechain-types/contracts/Minter'
 // import { useDisconnect, useAddress, useMetamask } from '@thirdweb-dev/react'
 
 
@@ -29,8 +31,8 @@ function Navbar() {
         if (connectSwitch && Window.ethereum !== undefined) {
             setAccount("")
             dispatch(saveAccount(""))
-            dispatch(saveMarketplaceContract(""))
-            dispatch(saveMinterContract(""))
+            dispatch(saveMarketplaceContract(null))
+            dispatch(saveMinterContract(null))
 
             let provider = Window.ethereum
             let ethersProvider = new ethers.providers.Web3Provider(provider);
@@ -45,8 +47,8 @@ function Navbar() {
 
             let signer = ethersProvider.getSigner()
 
-            const minter: any = new ethers.Contract(minterAddress, minterABI.abi, signer)
-            const marketplace: any = new ethers.Contract(marketplaceAddress, marketplaceABI.abi, signer)
+            const minter: any | undefined= new ethers.Contract(minterAddress, minterABI.abi, signer)
+            const marketplace: any | undefined  = new ethers.Contract(marketplaceAddress, marketplaceABI.abi, signer)
 
 
             if (marketplace) {

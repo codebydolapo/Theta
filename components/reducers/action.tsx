@@ -11,6 +11,9 @@
 //     }
 // }
 
+// import { Marketplace } from '../../typechain-types/contracts/Marketplace'
+// import { Minter } from '../../typechain-types/contracts/Minter'
+
 export const changeCategory = (category: any)=>{
     return {
         type: "SET_CATEGORY",
@@ -25,14 +28,14 @@ export const saveAccount = (account: any)=>{
     }
 }
 
-export const saveMarketplaceContract = (contractInstance: any)=>{
+export const saveMarketplaceContract = (contractInstance: undefined | any)=>{
     return{
         type: "SAVE_MARKETPLACE_CONTRACT",
         contractInstance
     }
 }
 
-export const saveMinterContract = (contractInstance: any)=>{
+export const saveMinterContract = (contractInstance: undefined | any)=>{
     return{
         type: "SAVE_MINTER_CONTRACT",
         contractInstance

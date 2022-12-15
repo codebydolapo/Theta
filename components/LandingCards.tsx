@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { useDispatch } from "react-redux"
 import { changeCategory } from "./reducers/action"
 
@@ -6,6 +7,7 @@ function LandingCards({ image, name, floorPrice }: any) {
     const dispatch = useDispatch()
 
     return (
+        <Link href = "/marketplace">
         <div className={`lg:min-w-[25rem] lg:w-[25rem] lg:h-[25rem] hover:scale-[105%] ease duration-[200ms] lg:mx-3 lg:my-0 relative rounded-xl xs:my-3 xs:min-w-[98vw] xs:w-[98vw] xs:h-[98vw]`} onClick = {()=>dispatch(changeCategory(name.toLowerCase()))}>
             <img className={`w-full h-auto rounded-[inherit] cursor-pointer`} src={image} alt='' />
             <div className={`w-full h-[30%] bg-[#111111c0] absolute bottom-0 rounded-b-[inherit] flex items-center justify-center flex-col`}>
@@ -21,6 +23,7 @@ function LandingCards({ image, name, floorPrice }: any) {
                 </div>
             </div>
         </div>
+        </Link>
     )
 }
 
