@@ -21,22 +21,22 @@ async function main() {
     fs.writeFileSync("src/minterAddress.js", `export const minterAddress = "${minter.address}"`)
     fs.writeFileSync("src/marketplaceAddress.js", `export const marketplaceAddress = "${marketplace.address}"`)
     
-    for(let i=0; i<8; i++){
+    for(let i=1; i<9; i++){
         let mintedMinter = await minter.mint(`../metadata/architecture/item${i}.json`, marketplace.address);
         console.log(`Architecture NFTs minted with hash ${mintedMinter.hash}`)
     }
 
-    for(let i=0; i<18; i++){
+    for(let i=1; i<19; i++){
         let mintedMinter = await minter.mint(`../metadata/digitalArt/item${i}.json`, marketplace.address);
         console.log(`digitalArt NFTs minted with hash ${mintedMinter.hash}`)
     }
 
-    for(let i=0; i<10; i++){
+    for(let i=1; i<11; i++){
         let mintedMinter = await minter.mint(`../metadata/nature/item${i}.json`, marketplace.address);
         console.log(`Nature NFTs minted with hash ${mintedMinter.hash}`)
     }
 
-    for(let i=0; i<9; i++){
+    for(let i=1; i<10; i++){
         let mintedMinter = await minter.mint(`../metadata/space/item${i}.json`, marketplace.address);
         console.log(`Space NFTs minted with hash ${mintedMinter.hash}`)
     }

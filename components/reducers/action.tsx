@@ -1,18 +1,17 @@
-// interface Item{
-//     name: string,
-//     image: string,
-//     value: string
-// }
+interface Item{
+    name: string,
+    description: string,
+    image: string,
+    index: string,
+    price: string
+}
 
-// export const addItem = (item: Item | null | undefined)=>{
-//     return{
-//         type: "SET_ITEM",
-//         item
-//     }
-// }
-
-// import { Marketplace } from '../../typechain-types/contracts/Marketplace'
-// import { Minter } from '../../typechain-types/contracts/Minter'
+export const addItem = (item: Item | null | undefined)=>{
+    return{
+        type: "SET_ITEM",
+        item
+    }
+}
 
 export const changeCategory = (category: any)=>{
     return {
@@ -39,5 +38,17 @@ export const saveMinterContract = (contractInstance: undefined | any)=>{
     return{
         type: "SAVE_MINTER_CONTRACT",
         contractInstance
+    }
+}
+
+export const activateCheckoutPopup = ()=>{
+    return{
+        type: "ACTIVATE_POPUP",
+    }
+}
+
+export const deactivateCheckoutPopup = ()=>{
+    return{
+        type: "DEACTIVATE_POPUP"
     }
 }

@@ -2,19 +2,18 @@ import styles from '../styles/collectionsbody.module.css'
 import { GlobeAltIcon, StarIcon, ShareIcon, DotsHorizontalIcon, SortAscendingIcon, SearchIcon, ViewGridIcon, ViewGridAddIcon, ChartSquareBarIcon, ChevronDownIcon } from '@heroicons/react/outline'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react';
-import Items from './Items';
+import NFTCard from './NFTCard';
 import {architecture} from '../data/architecture'
 import { digitalArt } from '../data/digitalArt'
 import { nature} from '../data/nature'
 import { space } from '../data/space'
-import { StringifyOptions } from 'querystring';
-import { AnyNsRecord } from 'dns';
-import { AnyAction } from 'redux';
+import Checkout from './Checkout';
+import { useDispatch } from 'react-redux';
 // import { marketplaceContract } from './reducers/reducer';
 // import { useState } from 'react';
 
 
-function CollectionsBody() {
+function MarketplaceBody() {
 
     let randomNumber;
 
@@ -28,12 +27,12 @@ function CollectionsBody() {
 
     const [NFTs, setNFTs] = useState<Props[]>(digitalArt)
 
-    let arr: any = [];
+    // let arr: any = [];
 
-    const marketplace = useSelector((state: any) => { return state.marketplaceContract })
 
     const category = useSelector((state: any) => { return state.category })
-    const account = useSelector((state: { account: any }) => { return state.account })
+    const account = useSelector((state: { account: string }) => { return state.account })
+    const checkoutPopupState = useSelector((state: { checkoutPopupState: boolean }) => { return state.checkoutPopupState })
 
     useEffect(() => {
         if (account) {
@@ -61,7 +60,7 @@ function CollectionsBody() {
 
     return (
         <>{
-            account ?
+            account || true ?
                 <div className={`w-full min-h-[100vh] h-auto flex flex-col items-center`}>
 
                     <div className={`w-full h-auto relative mb-[2rem]`}>
@@ -187,10 +186,10 @@ function CollectionsBody() {
 
                             <div className={`md:w-[60%] h-full flex flex-row items-center md:justify-around xs:justify-end xs:w-[50%] `}>
                                 <div className={`md:w-[30%] h-[3rem] flex border-2 border-grey rounded-lg xs:w-0`}>
-                                    <div className={`w-[80%] h-full flex items-center justify-start ml-3 md:visible xs:hidden`}>
-                                        <h1 className={`md:text-base font-bold xs:text-xs`}>Price low to high</h1>
+                                    <div className={`w-[80%] h-full flex flex-col items-center justify-start ml-3 md:visible xs:invisible`}>
+                                        <h1 className={`md:text-base font-bold xs:text-xs capitalize text-[#3578e5]`}>{category}</h1>
                                     </div>
-                                    <div className={`w-[20%] h-full flex items-center justify-center`}>
+                                    <div className={`w-[20%] h-full flex items-center justify-center `}>
                                         <ChevronDownIcon className={`w-[1.5rem] h-auto text-[#000000be]`} />
                                     </div>
                                 </div>
@@ -206,7 +205,7 @@ function CollectionsBody() {
                                     </div>
                                 </div>
                                 <div className={`md:w-[30%] h-[3rem] rounded-lg border-2 border-grey flex items-center justify-center md:px-0 xs:w-[80%] md:mx-0 xs:mx-2 xs:h-[2rem] `}>
-                                    <h1 className={`text-[#3578e5] font-bold md:text-base xs:text-sm`}>Make collection offer</h1>
+                                    <h1 className={`text-[#3578e5] font-bold md:text-base xs:text-sm capitalize`}>{category}</h1>
                                 </div>
                             </div>
 
@@ -217,7 +216,7 @@ function CollectionsBody() {
                         <div className={`w-full min-h-[70vh] h-auto flex`}>
                             <div className={`md:w-[100%] min-h-[33rem] h-auto flex flex-wrap items-center justify-around px-5 xs:w-[100%] ${styles.itemsContainer}`}>
                                 {NFTs.map(({ description, image, name, value, index, price }: any) => {
-                                    return <Items
+                                    return <NFTCard
                                         description={description}
                                         image={image}
                                         name={name}
@@ -230,7 +229,7 @@ function CollectionsBody() {
                         </div>
                     </div>
 
-
+                    {checkoutPopupState && <Checkout/>}
                 </div> :
                 <div className={`flex justify-center items-center`}>
                     <h1>404</h1>
@@ -240,4 +239,4 @@ function CollectionsBody() {
     )
 }
 
-export default CollectionsBody
+export default MarketplaceBody

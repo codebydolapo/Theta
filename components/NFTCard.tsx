@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import { useDispatch } from 'react-redux'
 import styles from '../styles/items.module.css'
-// import { addItem } from './reducers/action'
+import { activateCheckoutPopup } from './reducers/action';
+import { addItem } from './reducers/action'
 
 interface Collection{
     description: string,
@@ -11,21 +12,24 @@ interface Collection{
     price: string
 }
 
-function Items({description, image, name, price, index}: Collection) {
+function NFTCard({description, image, name, price, index}: Collection) {
 
     const dispatch =  useDispatch()
 
-    // function handleAddItem(){
-    //     dispatch(addItem({
-    //         image,
-    //         name,
-    //         value
-    //     }))
-    // }
+    function handleCheckout(){
+        dispatch(activateCheckoutPopup())
+        dispatch(addItem({
+            image,
+            name,
+            index,
+            price,
+            description
+        }))
+    }
 
     return (
         //  <Link href = '/item/item'>
-        <div className={`md:w-[18rem] md:h-[25rem] rounded-xl bg-[#ffffff] md:m-5 relative xs:w-[98%] xs:min-h-[25rem] xs:my-5   ${styles.item}`}>
+        <div className={`md:w-[18rem] md:h-[25rem] rounded-xl bg-[#ffffff] md:m-5 relative xs:w-[98%] xs:min-h-[25rem] xs:my-5 cursor-pointer ${styles.item}`} onClick = {handleCheckout}>
         {/* <div className={`md:w-[18rem] md:h-[25rem] rounded-xl bg-[#ffffff] m-5 relative xs:w-[95%] xs:min-h-[25rem] ${styles.item}`} onClick = {handleAddItem}> */}
             <div className={`md:w-[18rem] md:h-[18rem] overflow-hidden xs:w-full xs-h-[95vw]`}>
                 <img className={`rounded-xl md:w-auto md:h-full xs:w-full xs:h-auto ${styles.image}`} alt= '' src ={image}/>
@@ -51,4 +55,4 @@ function Items({description, image, name, price, index}: Collection) {
     )
 }
 
-export default Items
+export default NFTCard

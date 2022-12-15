@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Navbar from '../../components/Navbar'
-import CollectionsBody from '../../components/CollectionsBody'
+import CollectionsBody from '../../components/MarketplaceBody'
 import { useWeb3 } from '@3rdweb/hooks'
 import { useRouter } from 'next/router'
 import { ThirdwebSDK } from '@3rdweb/sdk'
@@ -9,10 +9,10 @@ import { ThirdwebSDK } from '@3rdweb/sdk'
 
 // let collectionId: any
 
-function Collections({props}: any) {
+function Collections({ props }: any) {
   //router.query
 
-  console.log({props})
+  console.log({ props })
 
   return (
     <div className={``}>

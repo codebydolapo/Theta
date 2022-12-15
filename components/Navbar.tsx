@@ -47,8 +47,8 @@ function Navbar() {
 
             let signer = ethersProvider.getSigner()
 
-            const minter: any | undefined= new ethers.Contract(minterAddress, minterABI.abi, signer)
-            const marketplace: any | undefined  = new ethers.Contract(marketplaceAddress, marketplaceABI.abi, signer)
+            const minter: any | undefined = new ethers.Contract(minterAddress, minterABI.abi, signer)
+            const marketplace: any | undefined = new ethers.Contract(marketplaceAddress, marketplaceABI.abi, signer)
 
 
             if (marketplace) {
@@ -56,6 +56,9 @@ function Navbar() {
                 dispatch(saveMinterContract(minter))
                 // console.log(marketplace)
                 // console.log(account)
+                marketplace.getTokenURL(1).then((data: any)=>{
+                    console.log(data)
+                })
             }
 
         } else if (connectSwitch && Window.ethereum == undefined) {
@@ -90,10 +93,12 @@ function Navbar() {
             </div>
             <div className={`w-[45%] h-full flex md:justify-center xs:justify-end`}>
                 <div className={`md:w-[75%] h-full flex justify-between xs:w-0`}>
-                    <div className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}>
-                        <h1 className={`lg:text-[0.9rem] hover:scale-[102%] ease font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>HOME</h1>
-                    </div>
-                    <Link href='/collections/something'>
+                    <Link href='/'>
+                        <div className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}>
+                            <h1 className={`lg:text-[0.9rem] hover:scale-[102%] ease font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>HOME</h1>
+                        </div>
+                    </Link>
+                    <Link href='/marketplace'>
                         <div className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}>
                             <h1 className={`lg:text-[0.9rem] hover:scale-[102%] ease font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>Marketplace</h1>
                         </div>
@@ -107,11 +112,11 @@ function Navbar() {
                 </div>
                 <div className={`md:w-[25%] h-full flex md:mx-0 xs:mx-2 xs:w-full justify-center items-center `}>
                     {account !== "" ?
-                        <div className={`w-[12rem] md:h-[45px] bg-[#1266e4] rounded-lg xs:h-[45px] xs:w-[100%] flex justify-center items-around`} onClick={connectMetamask}>
+                        <div className={`w-[12rem] md:h-[45px] bg-[#1266e4] rounded-lg xs:h-[45px] xs:w-[100%] flex justify-center items-around cursor-pointer`} onClick={connectMetamask}>
                             <h1 className={`text-white lg:text-base xs:text-sm flex justify-center items-center`}>{`${account.slice(0, 6)}...${account.slice(38, 42)}`}</h1>
-                        </div> 
+                        </div>
                         :
-                        <div className={`w-[12rem] md:h-[45px] bg-[#1266e4] rounded-lg xs:h-[45px] xs:w-[100%] flex justify-center items-around`} onClick={connectMetamask}>
+                        <div className={`w-[12rem] md:h-[45px] bg-[#1266e4] rounded-lg xs:h-[45px] xs:w-[100%] flex justify-center items-around cursor-pointer`} onClick={connectMetamask}>
                             <h1 className={`text-white lg:text-base xs:text-sm flex justify-center items-center`}>Connect Wallet</h1>
                         </div>
                     }

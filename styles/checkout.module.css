@@ -1,0 +1,8 @@
+.checkout{
+    position: absolute;
+    box-shadow: 1px 1px 10px black;
+}
+
+.checkout::-webkit-scrollbar{
+    display: none
+}
