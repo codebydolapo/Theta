@@ -18,7 +18,8 @@ module.exports = {
         hubballi: ["hubballi", 'sans-serif'],
         opensans: ['Open Sans', 'Sans Serif'],
         oswald: ['Oswald', 'Sans Serif'],
-        times: ["Times New Roman", "Times", "serif"]
+        times: ["Times New Roman", "Times", "serif"],
+        montserrat: ["montserrat", "sans serif"]
       }
     },
   },
