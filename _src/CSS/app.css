@@ -1,0 +1,21 @@
+*{
+    transition: all ease-in-out 500ms;
+}
+.app-main{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
+
+
+
+
+
+
+

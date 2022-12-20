@@ -1,123 +1,91 @@
-import { UserCircleIcon, CreditCardIcon, SearchIcon, XIcon } from '@heroicons/react/outline'
+import styles from '../styles/navbar.module.css'
 import Link from 'next/link'
-import { ethers } from 'ethers'
-import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-// import { saveAccount } from './reducers/action'
-import { marketplaceAddress } from '../src/marketplaceAddress'
-import { minterAddress } from '../src/minterAddress'
-import minterABI from '../artifacts/contracts/Minter.sol/Minter.json'
-import marketplaceABI from '../artifacts/contracts/Marketplace.sol/Marketplace.json'
-import { saveMarketplaceContract, saveMinterContract, saveAccount } from './reducers/action'
-// import { Marketplace } from '../typechain-types/contracts/Marketplace'
-// import { Minter } from '../typechain-types/contracts/Minter'
-// import { useDisconnect, useAddress, useMetamask } from '@thirdweb-dev/react'
+import { useState } from 'react'
 
+//fill="#0B0D17"
 
 function Navbar() {
 
+    const active = "h-[90%] w-[20%] flex items-center justify-center border-b-[3px] border-b-[#2282f0] cursor-pointer"
+    const inactive = "h-[90%] w-[20%] flex items-center justify-center hover:border-b-[3px] hover:border-b-[#fff] cursor-pointer"
 
+    const [homeEffect, setHomeEffect] = useState(inactive)
+    const [destinationsEffect, setDestinationsEffect] = useState(inactive)
+    const [crewEffect, setCrewEffect] = useState(inactive)
+    const [TechnologyEffect, setTechnologyEffect] = useState(inactive)
 
-    const dispatch = useDispatch()
-
-    const [connectSwitch, setconnectSwitch] = useState(false)
-    const [account, setAccount] = useState("")
-    // const [network, setNetwork] = useState("")
-
-
-
-    useEffect(() => {
-        let Window: any = window
-        if (connectSwitch && Window.ethereum !== undefined) {
-            setAccount("")
-            dispatch(saveAccount(""))
-            dispatch(saveMarketplaceContract(null))
-            dispatch(saveMinterContract(null))
-
-            let provider = Window.ethereum
-            let ethersProvider = new ethers.providers.Web3Provider(provider);
-
-            Window.ethereum.request({ method: "eth_requestAccounts" })
-                .then((accounts: any) => {
-                    setAccount(accounts[0])
-                    dispatch(saveAccount(accounts[0]))
-                    console.log(accounts[0])
-                })
-                .catch((err: any) => console.log(err))
-
-            let signer = ethersProvider.getSigner()
-
-            const minter: any | undefined = new ethers.Contract(minterAddress, minterABI.abi, signer)
-            const marketplace: any | undefined = new ethers.Contract(marketplaceAddress, marketplaceABI.abi, signer)
-
-
-            if (marketplace) {
-                dispatch(saveMarketplaceContract(marketplace))
-                dispatch(saveMinterContract(minter))
-                // console.log(marketplace)
-                // console.log(account)
-            }
-
-        } else if (connectSwitch && Window.ethereum == undefined) {
-            alert("Please Download Metamask")
-        }
-        setconnectSwitch(false)
-    }, [connectSwitch])
-
-
-
-    function connectMetamask() {
-        setconnectSwitch(true)
+    function handleHomeActivity(){
+        setHomeEffect(active)
+        setDestinationsEffect(inactive)
+        setCrewEffect(inactive)
+        setTechnologyEffect(inactive)
     }
 
+    function handleDestinationsActivity(){
+        setHomeEffect(inactive)
+        setDestinationsEffect(active)
+        setCrewEffect(inactive)
+        setTechnologyEffect(inactive)
+    }
+    function handleCrewActivity(){
+        setHomeEffect(inactive)
+        setDestinationsEffect(inactive)
+        setCrewEffect(active)
+        setTechnologyEffect(inactive)
+    }
+    function handleTechnologyActivity(){
+        setHomeEffect(inactive)
+        setDestinationsEffect(inactive)
+        setCrewEffect(inactive)
+        setTechnologyEffect(active)
+    }
 
     return (
-        <div className={`w-full h-[60px] flex flex-row space-between md:pl-[4rem] md:pr-[2rem]`}>
-            <div className={`w-[55%] h-full flex items-center justify-between`}>
-                <div className={`md:w-[30%] h-full flex items-center md:justify-center xs:w-[100%] xs:justify-start`}>
-                    <img className={`md:w-[40px] h-[40px] rounded-full md:mx-2 xs:w-[40px] xs:h-[40px] xs:mx-1`} alt='' src='/icons/logo.jpg' />
-                    <h1 className={`font-extrabold md:text-5xl text-[#1c1e21ea] xs:text-2xl`}><b className={`text-[#1877f2]`}>E</b>nefti</h1>
-                </div>
-                <div className={`w-[67%] h-[80%] flex items-center justify-between border-2 border-grey rounded-lg md:visible xs:hidden`}>
-                    <div className={`w-[3rem] h-full flex justify-center items-center cursor-pointer`}>
-                        <SearchIcon className={`w-[1.5rem] text-[#1c1e21c5] `} />
-                    </div>
-                    <input className={`w-auto min-w-[80%] h-full outline-0 border-0 pl-3`} placeholder='Search for colections, lists and NFTs' />
-                    <div className={`w-[3rem] h-full flex justify-center items-center cursor-pointer`}>
-                        <XIcon className={`w-[1.5rem] text-[#1c1e21c5]`} />
-                    </div>
-                </div>
+        <div className={`w-[100vw] h-[6rem] flex flex-row items-center justify-between px-[20px] fixed top-0`}>
+            <div className={`w-[20%] h-full flex items-center justify-around `}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="47" height="47">
+                    <g fill="none" fill-rule="evenodd">
+                        <circle cx="24" cy="24" r="24" fill="#FFF" />
+                        <path
+                            fill="#000"
+                            d="M24 0c0 16-8 24-24 24 15.718.114 23.718 8.114 24 24 0-16 8-24 24-24-16 0-24-8-24-24z"
+                        />
+                    </g>
+                </svg>
+                <h1 className={`text-white text-5xl font-bold font-times uppercase`}>Solaris</h1>
             </div>
-            <div className={`w-[45%] h-full flex md:justify-center xs:justify-end`}>
-                <div className={`md:w-[75%] h-full flex justify-between xs:w-0`}>
-                    <Link href='/'>
-                        <div className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}>
-                            <h1 className={`lg:text-[0.9rem] hover:scale-[102%] ease font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>HOME</h1>
+            <div className={`w-[60%] h-[80%] flex flex-row justify-around items-center bg-[#ffffff1a] px-[30px] rounded-lg  ${styles.navBar}`}>
+                <Link href={`/`}>
+                    <div className={homeEffect} onClick = {handleHomeActivity}>
+                        <div className={`text-white text-sm uppercase font-light tracking-[1px] `}>
+                            <b>00</b> Home
                         </div>
-                    </Link>
-                    <Link href='/marketplace'>
-                        <div className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}>
-                            <h1 className={`lg:text-[0.9rem] hover:scale-[102%] ease font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>Marketplace</h1>
-                        </div>
-                    </Link>
-                    <div className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}>
-                        <h1 className={`lg:text-[0.9rem] hover:scale-[102%] ease font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>CREATE</h1>
                     </div>
-                    {/* <div className={`w-[24%] h-full flex items-center justify-center cursor-pointer`}>
-                        <h1 className={`md:text-[0.9rem] font-extrabold text-[#1c1e21e0] xs:text-[0rem]`}>CREATE</h1>
-                    </div> */}
-                </div>
-                <div className={`md:w-[25%] h-full flex md:mx-0 xs:mx-2 xs:w-full justify-center items-center `}>
-                    {account !== "" ?
-                        <div className={`w-[12rem] md:h-[45px] bg-[#1266e4] rounded-lg xs:h-[45px] xs:w-[100%] flex justify-center items-around cursor-pointer`} onClick={connectMetamask}>
-                            <h1 className={`text-white lg:text-base xs:text-sm flex justify-center items-center`}>{`${account.slice(0, 6)}...${account.slice(38, 42)}`}</h1>
+                </Link>
+                <Link href={`/destinations`}>
+                    <div className={destinationsEffect} onClick = {handleDestinationsActivity}>
+                        <div className={`text-white text-sm uppercase font-light tracking-[1px]`} >
+                            <b>01</b> Destinations
                         </div>
-                        :
-                        <div className={`w-[12rem] md:h-[45px] bg-[#1266e4] rounded-lg xs:h-[45px] xs:w-[100%] flex justify-center items-around cursor-pointer`} onClick={connectMetamask}>
-                            <h1 className={`text-white lg:text-base xs:text-sm flex justify-center items-center`}>Connect Wallet</h1>
+                    </div>
+                </Link>
+
+                <Link href={`/crew`}>
+                    <div className={crewEffect} onClick = {handleCrewActivity}>
+                        <div className={`text-white text-sm uppercase font-light tracking-[1px]`} >
+                            <b>02</b> Crew
                         </div>
-                    }
-                </div>
+                    </div>
+                </Link>
+
+                <Link href={``}>
+                    <div className={TechnologyEffect} onClick = {handleTechnologyActivity}>
+                        <div className={`text-white text-sm uppercase font-light tracking-[1px]`}>
+                            <b>03</b> Technology
+                        </div>
+                    </div>
+                </Link>
+
             </div>
         </div>
     )

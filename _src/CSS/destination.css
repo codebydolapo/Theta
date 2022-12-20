@@ -1,0 +1,306 @@
+/*DESTINATION BEGINS HERE*/
+.destination-main {
+  background: url("../images/destination/background-destination-desktop.jpg")
+    no-repeat center center fixed;
+  background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+  height: 100vh;
+  font-family: "Open Sans", "Courier New", Courier, monospace;
+  overflow: hidden;
+}
+
+.destination-mainbody {
+  width: 100%;
+  height: 80vh;
+  margin-top: 20vh;
+  /* border: 1px solid white; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.destination-left {
+  width: 40%;
+  height: inherit;
+  color: white;
+  /* border: 1px solid white; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  padding: 0;
+}
+
+.destination-left > h3 {
+  color: white;
+  width: 350px;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 100;
+  letter-spacing: 1px;
+}
+
+.destination-left > img {
+  width: 300px;
+  height: 300px;
+  animation: animate 20s ease-in-out infinite;
+}
+
+.destination-right {
+  width: 60%;
+  height: inherit;
+  color: white;
+  /* padding: 50px 60px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.destNavBar {
+  display: flex;
+  width: 95%;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 30px;
+  /* border: 1px solid white; */
+  padding: 0;
+}
+
+.destNavBar > div {
+  width: 20%;
+  /* border: 2px solid white; */
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.destNavBar > div:hover {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.effect {
+  border-bottom: 2px solid rgba(0, 255, 255, 0.5);
+}
+
+.destNavBar > div > a {
+  text-transform: uppercase;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.destination-right > h1 {
+  font-size: 70px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-weight: 500;
+}
+
+.destination-right > h3 {
+  font-size: 16px;
+  font-weight: 100;
+  line-height: 22px;
+  margin-bottom: 30px;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.footer {
+  display: flex;
+  width: 90%;
+  height: 100px;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 20px;
+  text-transform: uppercase;
+  /* border: 1px solid white; */
+}
+
+.rightFooter > h3 {
+  font-size: 10px;
+  font-weight: 100;
+  margin-bottom: 10px;
+}
+
+.leftFooter > h3 {
+  font-size: 10px;
+  font-weight: 100;
+  margin-bottom: 10px;
+}
+
+@keyframes animate {
+  0% {
+    transform: rotateZ(0);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .destination-main {
+    background: url("../images/destination/background-destination-desktop.jpg")
+      no-repeat center center fixed;
+    background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    height: 100vh;
+    /* font-family: "Open Sans", "Courier New", Courier, monospace; */
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  .destination-main::-webkit-scrollbar{
+    display: none;
+  }
+
+  .destination-mainbody {
+    width: 100%;
+    height: 700px;
+    margin-top: 20vh;
+    /* border: 1px solid white; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 90px !important;
+  }
+
+  .destination-left {
+    width: 100%;
+    height: 400px;
+    color: white;
+    /* border: 1px solid white; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .destination-left > h3 {
+    color: white;
+    width: 350px;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 100;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  .destination-left > img {
+    width: 300px;
+    height: 300px;
+    animation: animate 20s ease-in-out infinite;
+  }
+
+  .destination-right {
+    width: 100%;
+    height: 500px;
+    color: white;
+    /* padding: 50px 60px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .destNavBar {
+    display: flex;
+    width: 95%;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 30px;
+    /* border: 1px solid white; */
+    padding: 0;
+  }
+
+  .destNavBar > div {
+    width: 20%;
+    /* border: 2px solid white; */
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: ease-in-out 500ms all;
+  }
+
+  .destNavBar > div:hover {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+  }
+
+  .effect {
+    border-bottom: 2px solid rgba(0, 255, 255, 0.5);
+  }
+
+  .destNavBar > div > a {
+    text-transform: uppercase;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .destination-right > h1 {
+    font-size: 70px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-weight: 500;
+  }
+
+  .destination-right > h3 {
+    font-size: 16px;
+    font-weight: 100;
+    line-height: 22px;
+    margin-bottom: 30px;
+    padding: 0 10px;
+    text-align: center;
+  }
+
+  .footer {
+    display: flex;
+    width: 90%;
+    height: 100px;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 20px;
+    text-transform: uppercase;
+    /* border: 1px solid white; */
+  }
+
+  .rightFooter > h3 {
+    font-size: 10px;
+    font-weight: 100;
+    margin-bottom: 10px;
+  }
+
+  .leftFooter > h3 {
+    font-size: 10px;
+    font-weight: 100;
+    margin-bottom: 10px;
+  }
+
+  @keyframes animate {
+    0% {
+      transform: rotateZ(0);
+    }
+    100% {
+      transform: rotateZ(360deg);
+    }
+  }
+}

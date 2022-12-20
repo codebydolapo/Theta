@@ -1,0 +1,294 @@
+/*CREW BEGINS HERE*/
+.crew-main {
+  background: url("../images/crew/background-crew-desktop.jpg") no-repeat center
+    center fixed;
+  background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.crew-mainbody {
+  width: 100%;
+  height: 85vh;
+  margin-top: 20vh;
+  /* border: 1px solid white; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.crew-left {
+  width: 60%;
+  height: inherit;
+  text-align: left;
+  /* border: 2px solid white; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.expContainer {
+  width: 100%;
+  height: 70%;
+  padding-left: 60px;
+  padding-right: 0px;
+  /* border: 1px solid white; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+}
+
+.meetCrew {
+  text-transform: uppercase;
+  color: white;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 100;
+  word-spacing: 5px;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  /* margin-bottom: 250px; */
+}
+
+.post {
+  text-transform: uppercase;
+  color: white;
+  text-transform: uppercase;
+  font-size: 22px;
+  font-weight: 100;
+  word-spacing: 5px;
+  letter-spacing: 2px;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  opacity: 70%;
+}
+
+.name {
+  text-transform: uppercase;
+  color: white;
+  text-transform: uppercase;
+  font-size: 40px;
+  font-weight: 100;
+  word-spacing: 5px;
+  letter-spacing: 1px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.intro {
+  font-size: 12px;
+  font-weight: 100;
+  line-height: 25px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+}
+
+.circleCont {
+  margin-top: 30px;
+  width: 60%;
+  height: 70px;
+  /* border: 2px solid white; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.circle {
+  width: 50px;
+  height: 50px;
+  border: 2px solid rgba(255, 255, 255, 1);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.circle:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#effect {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+}
+
+.crew-right {
+  width: 50%;
+  height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid white; */
+}
+
+.personnelImg {
+  width: auto;
+  height: 90%;
+  /* border: 1px solid white; */
+}
+
+@media only screen and (max-width: 700px) {
+  .crew-main {
+    background: url("../images/crew/background-crew-desktop.jpg") no-repeat
+      center center fixed;
+    background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    height: 100vh !important;
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  .crew-main::-webkit-scrollbar{
+      display: none;
+  }
+
+  .crew-mainbody {
+    width: 100%;
+    height: 900px !important;
+    margin-top: 70px;
+    /* border: 1px solid white; */
+    display: flex;
+    flex-direction: column-reverse !important;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    overflow: hidden;
+  }
+
+  .crew-left {
+    width: 100%;
+    height: 450px;
+    text-align: center;
+    /* border: 2px solid white; */
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .expContainer {
+    width: 100%;
+    height: 300px;
+    /* border: 1px solid white; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+  }
+
+  .meetCrew {
+    text-transform: uppercase;
+    color: white;
+    font-size: 18px;
+    font-weight: 100;
+    word-spacing: 5px;
+    letter-spacing: 1px;
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+
+  .post {
+    text-transform: uppercase;
+    color: white;
+    text-transform: uppercase;
+    font-size: 22px;
+    font-weight: 100;
+    word-spacing: 5px;
+    letter-spacing: 2px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    opacity: 70%;
+  }
+
+  .name {
+    text-transform: uppercase;
+    color: white;
+    text-transform: uppercase;
+    font-size: 40px;
+    font-weight: 100;
+    word-spacing: 5px;
+    letter-spacing: 1px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .intro {
+    font-size: 12px;
+    font-weight: 100;
+    line-height: 25px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+  }
+
+  .circleCont {
+    margin-top: 30px;
+    width: 60%;
+    height: 70px;
+    /* border: 2px solid white; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .circle {
+    width: 50px;
+    height: 50px;
+    border: 2px solid rgba(255, 255, 255, 1);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+
+  .circle:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  #effect {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+  }
+
+  .crew-right {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid white; */
+  }
+
+  .personnelImg {
+    width: auto;
+    height: 75% !important;
+    /* border: 1px solid white; */
+  }
+}

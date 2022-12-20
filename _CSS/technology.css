@@ -1,0 +1,275 @@
+/*TECHNOLOGY BEGINS HERE*/
+.technology-main {
+  background: url("../images/technology/background-technology-desktop.jpg")
+    no-repeat center center fixed;
+  background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.technology-mainbody {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20vh;
+  /* border: 1px solid white; */
+}
+
+.technology-left {
+  width: 55%;
+  height: inherit;
+  /* border: 2px solid white; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.circleDiv {
+  width: 10%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-left: 50px;
+  /* border: 2px solid white; */
+}
+
+.circles {
+  width: 50px;
+  height: 50px;
+  border: 0.5px solid white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: white;
+}
+
+.circles:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+#effect {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+}
+
+.leftBody {
+  width: 80%;
+  height: inherit;
+  padding: 80px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: left;
+  /* border: 2px solid white; */
+}
+
+.terminology {
+  text-transform: uppercase;
+  color: white;
+  font-size: 16px;
+  font-weight: lighter;
+  letter-spacing: 1px;
+}
+
+.heading {
+  text-transform: uppercase;
+  color: white;
+  font-size: 40px;
+  font-weight: lighter;
+  letter-spacing: 3px;
+  margin-top: 20px;
+}
+
+.description {
+  font-size: 13px;
+  font-weight: 100;
+  line-height: 22px;
+  margin-top: 10px;
+  letter-spacing: 1px;
+  font-weight: lighter;
+  color: white;
+}
+
+.technology-right {
+  width: 45%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 2px solid white; */
+}
+
+.rightImg {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+}
+
+@media only screen and (max-width: 700px) {
+  /*TECHNOLOGY BEGINS HERE*/
+  .technology-main {
+    background: url("../images/technology/background-technology-desktop.jpg")
+      no-repeat center center fixed;
+    background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  .technology-main::-webkit-scrollbar{
+    display: none;
+  }
+
+  .spaceLaunch {
+    margin-top: auto;
+    margin-bottom: 10px;
+    color: white;
+  }
+
+  .spaceLaunch > h3 {
+    width: 100%;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    word-spacing: 3px;
+    margin-top: 30px;
+    padding-left: 50px;
+    word-spacing: 3px;
+    font-weight: lighter;
+    line-height: 30px;
+  }
+
+  .spaceLaunch > h3 > b {
+    font-weight: bold;
+    opacity: 50%;
+    margin-right: 20px;
+  }
+
+  .technology-mainbody {
+    width: 100%;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-between;
+    margin-top: 70px;
+    /* border: 1px solid red; */
+  }
+
+  .technology-left {
+    width: 100%;
+    height: 500px;
+    /* border: 2px solid green; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+  }
+
+  .circleDiv {
+    width: 70%;
+    height: 50px ;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    /* border: 2px solid white; */
+    margin: 20px auto;
+  }
+
+  .circles {
+    width: 50px;
+    height: 50px;
+    border: 0.5px solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .circles:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  #effect {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+  }
+
+  .leftBody {
+    width: 100%;
+    /* height: 400px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    /* border: 2px solid white; */
+    padding: 0;
+  }
+
+  .terminology {
+    text-transform: uppercase;
+    color: white;
+    font-size: 16px;
+    font-weight: lighter;
+    letter-spacing: 1px;
+  }
+
+  .heading {
+    text-transform: uppercase;
+    color: white;
+    font-size: 40px;
+    font-weight: lighter;
+    letter-spacing: 3px;
+    width: 100%;
+    text-align: center;
+    /* border: 1px solid white; */
+  }
+
+  .description {
+    font-size: 13px;
+    font-weight: 100;
+    line-height: 22px;
+    margin-top: 10px;
+    letter-spacing: 1px;
+    font-weight: lighter;
+    text-align: center;
+  }
+
+  .technology-right {
+    width: 95%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid white; */
+  }
+
+  .rightImg {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+  }
+}
