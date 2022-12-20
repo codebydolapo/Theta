@@ -154,6 +154,10 @@ const Destinations: NextPage = () => {
                             <h1 className={`text-5xl uppercase tracking-[5px]`}>{estTravelTime}</h1>
                         </div>
                     </div>
+                    <div className = {`w-full h-[4rem] flex items-center justify-start px-5`}>
+                        <button className = {`w-[15rem] h-[3rem] bg-[#2282f0] font-bold text-white rounded-lg mx-3`}>Book Flight</button>
+                        <button className = {`w-[15rem] h-[3rem] bg-white font-bold text-[#313131] rounded-lg mx-5`}>More Details</button>
+                    </div>
                 </div>
             </div>
         </div>

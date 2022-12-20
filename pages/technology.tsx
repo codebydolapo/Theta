@@ -1,17 +1,24 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import styles from '../styles/index.module.css'
+import styles from '../styles/technology.module.css'
 // import { useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import { useEffect, useState } from 'react'
 
 const Technology: NextPage = () => {
 
+    const active = "w-[3rem] h-[3rem] rounded-full border-[1px] border-white flex items-center justify-center cursor-pointer bg-white text-black"
+    const inactive = "w-[3rem] h-[3rem] rounded-full border-[1px] border-white flex items-center justify-center cursor-pointer text-white hover:bg-white hover:text-black"
+
+    const [launchEffect, setLaunchEffect] = useState(inactive)
+    const [capsuleEffect, setCapsuleEffect] = useState(inactive)
+    const [portEffect, setPortEffect] = useState(inactive)
+
     const [heading, setHeading] = useState("");
     const [description, setDescription] = useState("");
     const [image, setImage] = useState("");
   
-    const circle = document.getElementsByClassName("circles");
+    // const circle = document.getElementsByClassName("circles");
   
     function switchLaunch() {
       const _heading = "launch vehicle";
@@ -22,9 +29,9 @@ const Technology: NextPage = () => {
       setDescription(_description);
       setImage("/images/technology/image-launch-vehicle-landscape.jpg");
   
-      circle[0].setAttribute("id", "effect");
-      circle[1].setAttribute("id", "");
-      circle[2].setAttribute("id", "");
+      setLaunchEffect(active)
+      setCapsuleEffect(inactive)
+      setPortEffect(inactive)
     }
   
     useEffect(() => {
@@ -40,9 +47,9 @@ const Technology: NextPage = () => {
       setDescription(_description);
       setImage("/images/technology/image-space-capsule-landscape.jpg");
   
-      circle[0].setAttribute("id", "");
-      circle[1].setAttribute("id", "effect");
-      circle[2].setAttribute("id", "");
+      setLaunchEffect(inactive)
+      setCapsuleEffect(active)
+      setPortEffect(inactive)
     }
   
     function switchSpaceport() {
@@ -54,13 +61,13 @@ const Technology: NextPage = () => {
       setDescription(_description);
       setImage("/images/technology/image-spaceport-landscape.jpg");
   
-      circle[0].setAttribute("id", "");
-      circle[1].setAttribute("id", "");
-      circle[2].setAttribute("id", "effect");
+      setLaunchEffect(inactive)
+      setCapsuleEffect(inactive)
+      setPortEffect(active)
     }
 
   return (
-    <div className={` h-[100vh] w-[100vw] font-opensans flex flex-col justify-end items-center ${styles.home_main}`}>
+    <div className={` h-[100vh] w-[100vw] font-opensans flex flex-col justify-end items-center ${styles.technology_main}`}>
       <Head>
         <title>Solaris | Technology</title>
         <meta name="description" content="Solaris: CodeByDolapo" />
@@ -70,28 +77,28 @@ const Technology: NextPage = () => {
       <Navbar/>
 
       <div className={`w-[100%] h-[80vh] flex justify-between items-around`}>
-        <div className={`w-[55%] h-full flexjustify-around items-center`}>
-          <div className={`w-[10%] h-[70%] flex flex-col items-center justify-around`}>
-            <div className="circles" onClick={switchLaunch}>
+        <div className={`w-[55%] h-full flex justify-around items-center`}>
+          <div className={`w-[10%] h-[20rem] flex flex-col items-center justify-around`}>
+            <div className={launchEffect} onClick={switchLaunch}>
               1
             </div>
-            <div className="circles" onClick={switchCapsule}>
+            <div className={capsuleEffect} onClick={switchCapsule}>
               2
             </div>
-            <div className="circles" onClick={switchSpaceport}>
+            <div className={portEffect} onClick={switchSpaceport}>
               3
             </div>
           </div>
 
-          <div className="leftBody">
-            <h3 className="terminology">The terminology...</h3>
-            <h1 className="heading">{heading}</h1>
-            <h3 className="description">{description}</h3>
+          <div className={`w-[80%] h-[20rem] flex flex-col justify-around items-left`}>
+            <h3 className={`uppercase text-white text-base tracking-wide`}>The terminology...</h3>
+            <h1 className={`uppercase text-white text-[2.5rem] tracking-wider`}>{heading}</h1>
+            <h3 className={`text-white`}>{description}</h3>
           </div>
         </div>
 
-        <div className="technology-right">
-          <img src={image} className="rightImg" alt="" />
+        <div className={`w-[45%] h-full flex items-center justify0center`}>
+          <img src={image} className={`w-full h-auto rounded-xl`} alt="" />
         </div>
       </div>
 
