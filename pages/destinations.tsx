@@ -3,6 +3,8 @@ import Head from 'next/head'
 import styles from '../styles/destinations.module.css'
 import { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
+import Menu from '../components/Menu'
+
 
 const Destinations: NextPage = () => {
 
@@ -115,13 +117,14 @@ const Destinations: NextPage = () => {
                 <link rel="icon" href="/icons/logo.png" />
             </Head>
             <Navbar />
-            <div className={`w-[100%] h-[80vh] text-white flex flex-row items-center justify-center mt-[10vh]`}>
-                <div className="w-[40%] h-full text-white flex justify-around items-center flex-col">
+            <Menu/>
+            <div className={`w-[100%] h-[80vh] text-white flex lg:flex-row items-center lg:justify-center mt-[10vh] xs:flex-col xs:overflow-y-scroll overflow-x-hidden`}>
+                <div className="lg:w-[40%] lg:h-full flex justify-around items-center flex-col xs:w-[100%] xs:min-h-[60vh]">
                     <h3 className = {`text-white w-[350px] uppercase text-xl tracking-[1px]`}>01 Pick Your Destination</h3>
-                    <img className={`w-[35vw] h-[35vw] ${styles.planet}`} src={image} alt='' />
+                    <img className={`lg:w-[35vw] lg:h-[35vw] xs:w-[90vw] xs:h-[90vw] ${styles.planet}`} src={image} alt='' />
                 </div>
 
-                <div className={`w-[60%] h-full text-white flex flex-col items-center justify-around`}>
+                <div className={`lg:w-[60%] h-full text-white flex flex-col items-center justify-around lg:mt-0 xs:w-[100vw] xs:mt-[3rem]`}>
                     <div className={`w-[95%] flex flex-row justify-around items-center`}>
                         <div className={moonEffect}  onClick={switchToMoon}>
                             <h1 className = {`uppercase text-white text-[1rem]`}>Moon</h1>
@@ -137,26 +140,26 @@ const Destinations: NextPage = () => {
                         </div>
                     </div>
 
-                    <h1 className={`text-7xl uppercase tracking-[5px]`}>{destination}</h1>
+                    <h1 className={`text-7xl uppercase tracking-[5px] lg:mt-0 xs:mt-[2rem]`}>{destination}</h1>
 
-                    <h3 className={`text-xl leading-7 tracking-wide text-center`}>{destDescription}</h3>
+                    <h3 className={`text-xl leading-7 tracking-wide text-center lg:mt-0 xs:mt-[2rem]`}>{destDescription}</h3>
 
                     <hr />
 
-                    <div className={`w-[90%] flex justify-between items-center uppercase`}>
+                    <div className={`lg:w-[90%] flex justify-between items-center uppercase lg:px-0 lg:mt-0 xs:mt-[2rem] xs:w-[100%] xs:px-2`}>
                         <div className={`flex flex-col justify-center items-center`}>
-                            <h3 className = {`text-sm mb-[1rem]`} >avg distance</h3>
-                            <h1 className={`text-5xl uppercase tracking-[5px]`}>{averageDist}</h1>
+                            <h3 className = {`lg:text-sm mb-[1rem] xs:text-xs`} >avg distance</h3>
+                            <h1 className={`lg:text-5xl uppercase tracking-[5px] xs:text-xl`}>{averageDist}</h1>
                         </div>
 
                         <div className={`flex flex-col justify-center items-center`}>
-                            <h3 className = {`text-sm mb-[1rem]`}>est travel time</h3>
-                            <h1 className={`text-5xl uppercase tracking-[5px]`}>{estTravelTime}</h1>
+                            <h3 className = {`lg:text-sm mb-[1rem] xs:text-xs`}>est travel time</h3>
+                            <h1 className={`lg:text-5xl uppercase tracking-[5px] xs:text-xl`}>{estTravelTime}</h1>
                         </div>
                     </div>
-                    <div className = {`w-full h-[4rem] flex items-center justify-start px-5`}>
-                        <button className = {`w-[15rem] h-[3rem] bg-[#2282f0] font-bold text-white rounded-lg mx-3`}>Book Flight</button>
-                        <button className = {`w-[15rem] h-[3rem] bg-white font-bold text-[#313131] rounded-lg mx-5`}>More Details</button>
+                    <div className = {`w-full h-[4rem] flex items-center lg:justify-start lg:px-5 lg:my-0 xs:my-[2rem] xs:justify-around`}>
+                        <button className = {`lg:w-[15rem] h-[3rem] bg-[#2282f0] font-bold text-white rounded-lg lg:mx-3 xs:w-[10rem]`}>Book Flight</button>
+                        <button className = {`lg:w-[15rem] h-[3rem] bg-white font-bold text-[#313131] rounded-lg lg:mx-5 xs:w-[10rem]`}>More Details</button>
                     </div>
                 </div>
             </div>

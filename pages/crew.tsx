@@ -3,6 +3,8 @@ import Head from 'next/head'
 import styles from '../styles/crew.module.css'
 import { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
+import Menu from '../components/Menu'
+
 
 const Crew: NextPage = () => {
 

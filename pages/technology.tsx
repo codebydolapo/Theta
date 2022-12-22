@@ -4,6 +4,7 @@ import styles from '../styles/technology.module.css'
 // import { useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import { useEffect, useState } from 'react'
+import Menu from '../components/Menu'
 
 const Technology: NextPage = () => {
 
