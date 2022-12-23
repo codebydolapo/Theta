@@ -16,7 +16,7 @@ const Crew: NextPage = () => {
     const [markEffect, setMarkEffect] = useState(inactive)
     const [victorEffect, setVictorEffect] = useState(inactive)
 
-   
+
 
     const [post, setPost] = useState("");
     const [name, setName] = useState("");
@@ -132,39 +132,40 @@ const Crew: NextPage = () => {
                 <meta name="description" content="Solaris: CodeByDolapo" />
                 <link rel="icon" href="/icons/logo.png" />
             </Head>
-            <Navbar />
-            <div className={`w-[100%] h-[85vh] flex flex-row justify-center items-center`}>
-                <div className={`w-[60%] h-full text-left flex flex-col justify-around items-center md:px-5`}>
+            <Navbar place = {"crew"}/>
+            <Menu/>
+            <div className={`w-[100%] h-[85vh] text-white flex lg:flex-row items-center lg:justify-center mt-[10vh] md:pt-[5rem] xs:flex-col-reverse xs:overflow-y-scroll overflow-x-hidden`}>
+                <div className={`lg:w-[60%] lg:h-full lg:my-0 lg:text-left flex flex-col justify-around items-center md:px-5 xs:w-[100%] xs:h-[70vh] xs:my-[5rem] xs:text-center`}>
                     <div className={`w-[100%] h-[70%] flex flex-col items-left justify-center`}>
-                        <h1 className={`uppercase text-white text-lg tracking-[5px] my-[20px]`}>02 meet your crew</h1>
+                        <h1 className={`uppercase text-white lg:text-lg tracking-[5px] lg:my-[20px] xs:text-[0rem]`}>02 meet your crew</h1>
 
                         <h1 className={`capitalize text-white text-2xl opacity-[70%] tracking-wider mt-5`}>{post}</h1>
 
-                        <h1 className={`uppercase text-white text-[3rem] tracking-5px font-bold font-times`}>{name}</h1>
+                        <h1 className={`uppercase text-white lg:text-[3rem] tracking-5px font-bold font-times xs:text-[2.5rem]`}>{name}</h1>
 
                         <h3 className={`text-lg leading-[25px] text-white mt-5`}>{intro}</h3>
                     </div>
-                    <div className={`w-[60%] h-[4.5rem] flex items-center justify-around`}>
+                    <div className={`lg:w-[60%] h-[4.5rem] lg:my-0 flex items-center justify-around xs:w-[95%] xl:my-3`}>
                         <div
-                            className={douglasEffect}
+                            className={`hover:scale-[110%] ease-in-out duration-[200ms] cursor-pointer  ${douglasEffect}`}
                             onClick={switchDouglas}
                         >
                             1
                         </div>
                         <div
-                            className={anoushehEffect}
+                            className={`hover:scale-[110%] ease-in-out duration-[200ms] cursor-pointer  ${anoushehEffect}`}
                             onClick={switchAnousheh}
                         >
                             2
                         </div>
                         <div
-                            className={markEffect}
+                            className={`hover:scale-[110%] ease-in-out duration-[200ms] cursor-pointer  ${markEffect}`}
                             onClick={switchMark}
                         >
                             3
                         </div>
                         <div
-                            className={victorEffect}
+                            className={`hover:scale-[110%] ease-in-out duration-[200ms] cursor-pointer  ${victorEffect}`}
                             onClick={switchVictor}
                         >
                             4
@@ -172,8 +173,8 @@ const Crew: NextPage = () => {
                     </div>
                 </div>
 
-                <div className={`w-[50%] h-inherit flex items-center justify-center`}>
-                    <img src={image} className={`h-[70%] w-auto`} alt='' />
+                <div className={`lg:w-[50%] lg:h-full flex items-center justify-center xs:w-[100%] xs:h-auto`}>
+                    <img src={image} className={`lg:h-[100%] lg:w-auto xs:h-auto xs:w-[95%] hover:scale-[110%] ease-in-out duration-[500ms] cursor-pointer `} alt='' />
                 </div>
             </div>
         </div>

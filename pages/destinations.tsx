@@ -109,6 +109,8 @@ const Destinations: NextPage = () => {
         setTitanEffect(active)
     }
 
+    // let _place: string = "destinations"
+
     return (
         <div className={` h-[100vh] w-[100vw] font-opensans flex flex-col justify-end items-center  ${styles.destinations_main}`}>
             <Head>
@@ -116,15 +118,15 @@ const Destinations: NextPage = () => {
                 <meta name="description" content="Solaris: CodeByDolapo" />
                 <link rel="icon" href="/icons/logo.png" />
             </Head>
-            <Navbar />
+            <Navbar place = {"destinations"}/>
             <Menu/>
-            <div className={`w-[100%] h-[80vh] text-white flex lg:flex-row items-center lg:justify-center mt-[10vh] xs:flex-col xs:overflow-y-scroll overflow-x-hidden`}>
+            <div className={`w-[100%] h-[80vh] text-white flex lg:flex-row items-center lg:justify-center mt-[10vh] md:pt-[5rem] xs:flex-col xs:overflow-y-scroll overflow-x-hidden`}>
                 <div className="lg:w-[40%] lg:h-full flex justify-around items-center flex-col xs:w-[100%] xs:min-h-[60vh]">
-                    <h3 className = {`text-white w-[350px] uppercase text-xl tracking-[1px]`}>01 Pick Your Destination</h3>
+                    <h3 className = {`text-white w-[350px] uppercase text-xl tracking-[1px] md:my-5`}>01 Pick Your Destination</h3>
                     <img className={`lg:w-[35vw] lg:h-[35vw] xs:w-[90vw] xs:h-[90vw] ${styles.planet}`} src={image} alt='' />
                 </div>
 
-                <div className={`lg:w-[60%] h-full text-white flex flex-col items-center justify-around lg:mt-0 xs:w-[100vw] xs:mt-[3rem]`}>
+                <div className={`lg:w-[60%] h-full text-white flex flex-col items-center justify-around lg:mt-0 md:my-[5rem] xs:w-[100vw] xs:mt-[3rem]`}>
                     <div className={`w-[95%] flex flex-row justify-around items-center`}>
                         <div className={moonEffect}  onClick={switchToMoon}>
                             <h1 className = {`uppercase text-white text-[1rem]`}>Moon</h1>
@@ -158,8 +160,8 @@ const Destinations: NextPage = () => {
                         </div>
                     </div>
                     <div className = {`w-full h-[4rem] flex items-center lg:justify-start lg:px-5 lg:my-0 xs:my-[2rem] xs:justify-around`}>
-                        <button className = {`lg:w-[15rem] h-[3rem] bg-[#2282f0] font-bold text-white rounded-lg lg:mx-3 xs:w-[10rem]`}>Book Flight</button>
-                        <button className = {`lg:w-[15rem] h-[3rem] bg-white font-bold text-[#313131] rounded-lg lg:mx-5 xs:w-[10rem]`}>More Details</button>
+                        <button className = {`lg:w-[15rem] h-[3rem] bg-[#2282f0] font-bold text-white rounded-lg lg:mx-3 xs:w-[10rem] hover:scale-[110%] ease-in-out duration-[200ms] cursor-pointer`}>Book Flight</button>
+                        <button className = {`lg:w-[15rem] h-[3rem] bg-white font-bold text-[#313131] rounded-lg lg:mx-5 xs:w-[10rem] hover:scale-[110%] ease-in-out duration-[200ms] cursor-pointer`}>More Details</button>
                     </div>
                 </div>
             </div>

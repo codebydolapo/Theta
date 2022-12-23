@@ -29,7 +29,7 @@ function Menu() {
                     <ArrowLeftIcon className={styles.ChevronUpIcon} />
                     {/* <h2 className = {`text-white text-xl`}>back</h2> */}
                 </div>
-                <Link href='/home'>
+                <Link href='/'>
                     <div className={`${styles.menuDiv}`} onClick={handleBurgerState}>
                         <h1>Home</h1>
                     </div>

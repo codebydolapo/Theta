@@ -1,12 +1,12 @@
 import styles from '../styles/navbar.module.css'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { activateHamburger, deactivateHamburger } from "./reducers/action"
 
 //fill="#0B0D17"
 
-function Navbar() {
+function Navbar({place}: {place: string}) {
 
     const active = "h-[90%] w-[20%] flex items-center justify-center border-b-[3px] border-b-[#2282f0] cursor-pointer"
     const inactive = "h-[90%] w-[20%] flex items-center justify-center hover:border-b-[3px] hover:border-b-[#fff] cursor-pointer"
@@ -16,31 +16,36 @@ function Navbar() {
     const [crewEffect, setCrewEffect] = useState(inactive)
     const [TechnologyEffect, setTechnologyEffect] = useState(inactive)
 
-    function handleHomeActivity() {
-        setHomeEffect(active)
-        setDestinationsEffect(inactive)
-        setCrewEffect(inactive)
-        setTechnologyEffect(inactive)
-    }
+    let _place: string
+    
+    useEffect(()=>{
+        _place = place
+    }, [])
 
-    function handleDestinationsActivity() {
-        setHomeEffect(inactive)
-        setDestinationsEffect(active)
-        setCrewEffect(inactive)
-        setTechnologyEffect(inactive)
-    }
-    function handleCrewActivity() {
-        setHomeEffect(inactive)
-        setDestinationsEffect(inactive)
-        setCrewEffect(active)
-        setTechnologyEffect(inactive)
-    }
-    function handleTechnologyActivity() {
-        setHomeEffect(inactive)
-        setDestinationsEffect(inactive)
-        setCrewEffect(inactive)
-        setTechnologyEffect(active)
-    }
+    useEffect(()=>{
+        if(_place == "home"){
+            setHomeEffect(active)
+            setDestinationsEffect(inactive)
+            setCrewEffect(inactive)
+            setTechnologyEffect(inactive)
+        }
+        else if(_place == "destinations"){
+            setHomeEffect(inactive)
+            setDestinationsEffect(active)
+            setCrewEffect(inactive)
+            setTechnologyEffect(inactive)
+        } else  if(_place == "crew"){
+            setHomeEffect(inactive)
+            setDestinationsEffect(inactive)
+            setCrewEffect(active)
+            setTechnologyEffect(inactive)
+        } else if(_place == "technology"){
+            setHomeEffect(inactive)
+            setDestinationsEffect(inactive)
+            setCrewEffect(inactive)
+            setTechnologyEffect(active)
+        }
+    }, [])
 
     interface HamburgerState {
         hamburgerState: boolean
@@ -74,14 +79,14 @@ function Navbar() {
             </div>
             <div className={`lg:w-[60%] h-[80%] flex flex-row lg:justify-around items-center lg:bg-[#ffffff1a] xs:bg-0 md:px-[30px] xs:w-[70%] rounded-lg xs:justify-end  ${styles.navBar}`}>
                 <Link href={`/`}>
-                    <div className={homeEffect} onClick={handleHomeActivity}>
+                    <div className={homeEffect} >
                         <div className={`text-white lg:text-sm uppercase font-light tracking-[1px] xs:text-[0rem] `}>
                             <b >00</b> Home
                         </div>
                     </div>
                 </Link>
                 <Link href={`/destinations`}>
-                    <div className={destinationsEffect} onClick={handleDestinationsActivity}>
+                    <div className={destinationsEffect}>
                         <div className={`text-white lg:text-sm uppercase font-light tracking-[1px] xs:text-[0rem]`} >
                             <b>01</b> Destinations
                         </div>
@@ -89,15 +94,15 @@ function Navbar() {
                 </Link>
 
                 <Link href={`/crew`}>
-                    <div className={crewEffect} onClick={handleCrewActivity}>
+                    <div className={crewEffect}>
                         <div className={`text-white lg:text-sm uppercase font-light tracking-[1px] xs:text-[0rem]`} >
                             <b>02</b> Crew
                         </div>
                     </div>
                 </Link>
 
-                <Link href={``}>
-                    <div className={TechnologyEffect} onClick={handleTechnologyActivity}>
+                <Link href={`/technology`}>
+                    <div className={TechnologyEffect}>
                         <div className={`text-white lg:text-sm uppercase font-light tracking-[1px] xs:text-[0rem]`}>
                             <b>03</b> Technology
                         </div>
