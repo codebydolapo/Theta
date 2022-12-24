@@ -7,6 +7,10 @@ import Menu from '../components/Menu'
 import Popup from '../components/Popup'
 import { useDispatch, useSelector } from 'react-redux'
 import { activatePopup, deactivatePopup, setPlanet } from "../components/reducers/action"
+import { ethers } from 'ethers'
+import { saveAccount, saveContract } from '../components/reducers/action'
+import { solarisAddress } from '../src/solarisAddress'
+import solarisABI from '../artifacts/contracts/Solaris.sol/Solaris.json'
 
 
 const Destinations: NextPage = () => {
@@ -28,6 +32,9 @@ const Destinations: NextPage = () => {
     const [averageDist, setAverageDist] = useState("");
     const [estTravelTime, setEstTravelTime] = useState("");
 
+    const [price, setPrice] = useState("")
+    const [paid, setPaid] = useState(false)
+
     function switchToMoon() {
         const _image = "/images/destination/image-moon.webp"
         const _destination = 'moon'
@@ -36,11 +43,14 @@ const Destinations: NextPage = () => {
 
         const _estTravelTime = "3 days";
 
+        const price = "0.02"
+
         setImage(_image)
         setDestination(_destination)
         setDestDescription(_destDesctiption)
         setAverageDist(_averageDist)
         setEstTravelTime(_estTravelTime)
+        setPrice(price)
 
         setMoonEffect(active)
         setMarsEffect(inactive)
@@ -61,11 +71,15 @@ const Destinations: NextPage = () => {
 
         const _estTravelTime = "9 months";
 
+        const price = "0.022"
+
         setImage(_image);
         setDestination(_destination);
         setDestDescription(_destDesctiption);
         setAverageDist(_averageDist);
         setEstTravelTime(_estTravelTime);
+        setPrice(price)
+
 
         setMoonEffect(inactive)
         setMarsEffect(active)
@@ -82,11 +96,15 @@ const Destinations: NextPage = () => {
 
         const _estTravelTime = "3 years";
 
+        const price = "0.053"
+
         setImage(_image);
         setDestination(_destination);
         setDestDescription(_destDesctiption);
         setAverageDist(_averageDist);
         setEstTravelTime(_estTravelTime);
+        setPrice(price)
+
 
         setMoonEffect(inactive)
         setMarsEffect(inactive)
@@ -102,11 +120,15 @@ const Destinations: NextPage = () => {
         const _averageDist = "1.6 bil. km";
         const _estTravelTime = "7 years";
 
+        const price = "0.013"
+
         setImage(_image);
         setDestination(_destination);
         setDestDescription(_destDesctiption);
         setAverageDist(_averageDist);
         setEstTravelTime(_estTravelTime);
+        setPrice(price)
+
 
         setMoonEffect(inactive)
         setMarsEffect(inactive)
@@ -119,12 +141,69 @@ const Destinations: NextPage = () => {
     const popupState = useSelector((state: any) => state.popupState)
 
 
-    const dispatch = useDispatch()
-
     function handlePopupState() {
         dispatch(setPlanet(image))
         dispatch(activatePopup())
-        console.log(image)
+    }
+
+    const dispatch = useDispatch()
+
+    const [connectSwitch, setconnectSwitch] = useState(false)
+    // const [account, setAccount] = useState("")
+
+    useEffect(() => {
+        let Window: any = window
+        if (connectSwitch && Window.ethereum !== undefined) {
+            // setAccount("")
+            dispatch(saveAccount(""))
+            dispatch(saveContract(null))
+
+            let provider = Window.ethereum
+            let ethersProvider = new ethers.providers.Web3Provider(provider);
+
+            Window.ethereum.request({ method: "eth_requestAccounts" })
+                .then((accounts: any) => {
+                    // setAccount(accounts[0])
+                    dispatch(saveAccount(accounts[0]))
+                    console.log(accounts[0])
+                })
+                .catch((err: any) => console.log(err))
+
+            let signer = ethersProvider.getSigner()
+
+            const solaris: any | undefined = new ethers.Contract(solarisAddress, solarisABI.abi, signer)
+
+
+            if (solaris) {
+                dispatch(saveContract(solaris))
+            }
+
+        } else if (connectSwitch && Window.ethereum == undefined) {
+            alert("Please Download Metamask")
+        }
+        setconnectSwitch(false)
+    }, [connectSwitch])
+
+    const solaris = useSelector((state: any)=>{
+        return state.contract
+    })
+
+    const account = useSelector((state: any)=>{
+        return state.account
+    })
+
+    async function handleWeb3() {
+        if(account){
+            const paymentReceipt = await solaris.connect(account).acceptPayment({value: ethers.utils.parseUnits(price, "ether")})
+            if(paymentReceipt.hash){
+                setPaid(true)
+            }
+        } else{
+            setconnectSwitch(true)
+            await solaris.connect(account).acceptPayment({value: ethers.utils.parseUnits(price, "ether")})
+
+        }
+
     }
 
     return (
@@ -136,7 +215,7 @@ const Destinations: NextPage = () => {
             </Head>
             <Navbar place={"destinations"} />
             <Menu />
-            {popupState && <Popup destination = {destination} image = {image}/>}
+            {true && <Popup destination={destination} image={image} />}
             <div className={`w-[100%] h-[80vh] text-white flex lg:flex-row items-center lg:justify-center mt-[10vh] md:pt-[5rem] xs:flex-col xs:overflow-y-scroll overflow-x-hidden`}>
                 <div className="lg:w-[40%] lg:h-full flex justify-around items-center flex-col xs:w-[100%] xs:min-h-[60vh]">
                     <h3 className={`text-white w-[350px] uppercase text-xl tracking-[1px] md:my-5`}>01 Pick Your Destination</h3>
@@ -177,11 +256,16 @@ const Destinations: NextPage = () => {
                         </div>
                     </div>
                     <div className={`w-full h-[4rem] flex items-center lg:justify-start lg:px-5 lg:my-0 xs:my-[2rem] xs:justify-around`}>
-                        <button className={`lg:w-[15rem] h-[3rem] bg-[#2282f0] font-bold text-white rounded-lg lg:mx-3 xs:w-[10rem] hover:scale-[110%] ease-in-out duration-[200ms] cursor-pointer`}>Book Flight</button>
+                        {/* {paid ? <button className={`lg:w-[15rem] h-[3rem] bg-[#2282f0] font-bold text-white rounded-lg lg:mx-3 xs:w-[10rem] hover:scale-[110%] ease-in-out duration-[200ms] cursor-pointer`}>Payment Successful</button>
+                        :
+                        <button className={`lg:w-[15rem] h-[3rem] bg-[#2282f0] font-bold text-white rounded-lg lg:mx-3 xs:w-[10rem] hover:scale-[110%] ease-in-out duration-[200ms] cursor-pointer`}onClick = {handleWeb3}>Book Flight</button>
+                        } */}
                         <button className={`lg:w-[15rem] h-[3rem] bg-white font-bold text-[#313131] rounded-lg lg:mx-5 xs:w-[10rem] hover:scale-[110%] ease-in-out duration-[200ms] cursor-pointer`} onClick={handlePopupState}>More Details</button>
                     </div>
                 </div>
             </div>
+
+
         </div>
     );
 

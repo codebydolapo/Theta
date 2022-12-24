@@ -32,9 +32,28 @@ export const planet = (state = "", action: {type: string, planet: string})=>{
     }
 }
 
+export const account = (state = "", action: {type: string, account: string})=>{
+    switch(action.type){
+        case "SAVE_ACCOUNT":
+            return state = action.account;
+        default:
+            return ""
+    }
+}
+
+export const contract = (state = [], action: {type: string, contract: any})=>{
+    switch(action.type){
+        case "SAVE_CONTRACT":
+            return state = action.contract;
+        default:
+            return []
+    }
+}
 
 export const allReducers = combineReducers({
     hamburgerState,
     popupState,
-    planet
+    planet,
+    account,
+    contract
 })

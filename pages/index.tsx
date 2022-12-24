@@ -1,24 +1,26 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/index.module.css'
-// import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import Link from 'next/link'
 import Menu from '../components/Menu'
 
 
+
 const Home: NextPage = () => {
 
+
   return (
-    <div className={` h-[100vh] w-[100vw] font-opensans flex flex-col justify-end items-center ${styles.home_main}`}>
+    <div className={` h-[100vh] w-[100vw] font-opensans flex flex-col justify-end items-center relative ${styles.home_main}`}>
       <Head>
         <title>Solaris | Home</title>
         <meta name="description" content="Solaris: CodeByDolapo" />
         <link rel="icon" href="/icons/logo.png" />
       </Head>
 
-      <Navbar place = {"home"}/>
-      <Menu/>
+      <Navbar place={"home"} />
+      <Menu />
 
       <div className={`w-[100%] h-[80vh] text-white flex lg:flex-row lg:pt-0 items-center lg:justify-center mt-[10vh] xs:flex-col overflow-y-scroll xs:pt-[5rem] ${``}`}>
         <div className={`lg:w-[50%] h-inherit flex flex-col lg:items-left justify-center px-[5%] xs:items-center xs:w-[100vw] ${``}`}>
@@ -42,7 +44,10 @@ const Home: NextPage = () => {
           </Link>
         </div>
       </div>
+
+
       
+
     </div>
   );
 

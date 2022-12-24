@@ -6,6 +6,8 @@ import Navbar from '../components/Navbar'
 import Menu from '../components/Menu'
 
 
+
+
 const Crew: NextPage = () => {
 
     const active = "w-[3.1rem] h-[3.1rem] rounded-full flex items-center justify-center bg-white text-black cursor-pointer"
@@ -125,15 +127,16 @@ const Crew: NextPage = () => {
 
     }
 
+
     return (
-        <div className={` h-[100vh] w-[100vw] font-opensans flex flex-col justify-end items-center  ${styles.crew_main}`}>
+        <div className={` h-[100vh] w-[100vw] font-opensans flex flex-col justify-end items-center relative  ${styles.crew_main}`}>
             <Head>
                 <title>Solaris | Crew</title>
                 <meta name="description" content="Solaris: CodeByDolapo" />
                 <link rel="icon" href="/icons/logo.png" />
             </Head>
-            <Navbar place = {"crew"}/>
-            <Menu/>
+            <Navbar place={"crew"} />
+            <Menu />
             <div className={`w-[100%] h-[85vh] text-white flex lg:flex-row items-center lg:justify-center mt-[10vh] md:pt-[5rem] xs:flex-col-reverse xs:overflow-y-scroll overflow-x-hidden`}>
                 <div className={`lg:w-[60%] lg:h-full lg:my-0 lg:text-left flex flex-col justify-around items-center md:px-5 xs:w-[100%] xs:h-[70vh] xs:my-[5rem] xs:text-center`}>
                     <div className={`w-[100%] h-[70%] flex flex-col items-left justify-center`}>
@@ -177,6 +180,7 @@ const Crew: NextPage = () => {
                     <img src={image} className={`lg:h-[100%] lg:w-auto xs:h-auto xs:w-[95%] hover:scale-[110%] ease-in-out duration-[500ms] cursor-pointer `} alt='' />
                 </div>
             </div>
+
         </div>
     );
 

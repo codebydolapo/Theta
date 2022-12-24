@@ -20,3 +20,17 @@ export const setPlanet = (planet: string)=>{
         planet
     }
 }
+
+export const saveAccount = (account: string)=>{
+    return{
+        type: "SAVE_ACCOUNT",
+        account
+    }
+}
+
+export const saveContract = (contract: any)=>{
+    return{
+        type: "SAVE_CONTRACT",
+        contract
+    }
+}

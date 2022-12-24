@@ -1,8 +1,12 @@
 import { ArrowLeftIcon } from "@heroicons/react/outline"
 import styles from '../styles/destinations.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { activatePopup, deactivatePopup } from "./reducers/action"
 import { useEffect, useState } from "react"
+import { deactivatePopup } from "../components/reducers/action"
+import { ethers } from 'ethers'
+import { saveAccount, saveContract } from '../components/reducers/action'
+import { solarisAddress } from '../src/solarisAddress'
+import solarisABI from '../artifacts/contracts/Solaris.sol/Solaris.json'
 
 interface Props {
     destination: string,
@@ -18,6 +22,11 @@ function Popup({ destination, image }: Props) {
     const [price, setPrice] = useState("")
 
     const [_destination, _setDestination] = useState("moon")
+
+    const [paid, setPaid] = useState(false)
+
+    const [userEmail, setUserEmail] = useState()
+
 
     const dispatch = useDispatch()
 
@@ -54,14 +63,81 @@ function Popup({ destination, image }: Props) {
         dispatch(deactivatePopup())
     }
 
+
+    const [connectSwitch, setconnectSwitch] = useState(false)
+    // const [account, setAccount] = useState("")
+
+    useEffect(() => {
+        let Window: any = window
+        if (connectSwitch && Window.ethereum !== undefined) {
+            // setAccount("")
+            dispatch(saveAccount(""))
+            dispatch(saveContract(null))
+
+            let provider = Window.ethereum
+            let ethersProvider = new ethers.providers.Web3Provider(provider);
+
+            Window.ethereum.request({ method: "eth_requestAccounts" })
+                .then((accounts: any) => {
+                    // setAccount(accounts[0])
+                    dispatch(saveAccount(accounts[0]))
+                    console.log(accounts[0])
+                })
+                .catch((err: any) => console.log(err))
+
+            let signer = ethersProvider.getSigner()
+
+            const solaris: any | undefined = new ethers.Contract(solarisAddress, solarisABI.abi, signer)
+
+
+            if (solaris) {
+                dispatch(saveContract(solaris))
+            }
+
+        } else if (connectSwitch && Window.ethereum == undefined) {
+            alert("Please Download Metamask")
+        }
+        setconnectSwitch(false)
+    }, [connectSwitch])
+
+    const solaris = useSelector((state: any) => {
+        return state.contract
+    })
+
+    const account = useSelector((state: any) => {
+        return state.account
+    })
+
+    async function handleWeb3() {
+        if (account && !userEmail) {
+            alert("please enter an email address")
+        } 
+        else if (account && userEmail) {
+            const paymentReceipt = await solaris.connect(account).acceptPayment({ from: account, value: ethers.utils.parseUnits(price, "ether") })
+            if (paymentReceipt.hash) {
+                setPaid(true)
+            }
+        }
+        else {
+            setconnectSwitch(true)
+            await solaris.connect(account).acceptPayment({ from: account, value: ethers.utils.parseUnits(price, "ether") })
+        }
+
+    }
+
+    function handleEmailAddress(e: any) {
+        setUserEmail(e.target.value)
+    }
+
     return (
         <div className={`w-[95vw] h-[90vh] bottom-auto top-auto lg:pb-0 flex flex-col items-center justify-between bg-black absolute rounded-xl z-[10] border-[1px] border-grey overflow-y-scroll overflow-x-hidden xs:pb-4`}>
             <div className={`w-full h-[5rem] px-5 flex items-center justify-end `}>
                 <ArrowLeftIcon className={`text-white lg:w-[3rem] font-thin cursor-pointer xs:w-[2rem]`} onClick={handlePopupState} />
             </div>
             <div className={`w-full lg:h-[80%] flex lg:flex-row items-center lg:my-0 lg:justify-center xs:flex-col xs:h-[80vh] xs:my-5`}>
-                <div className={`lg:w-[50%] h-full lg:my-0 flex items-center justify-center xs:w-full xs:my-5`}>
+                <div className={`lg:w-[50%] h-full lg:my-0 flex flex-col items-center justify-around xs:w-full xs:my-5`}>
                     <img className={`lg:w-[25rem] lg:h-[25rem] xs:w-[90vw] xs:h-[90vw] ${styles.planet}`} src={image} alt='' />
+                    <input type="email" placeholder="Enter your email Address" className={`w-[90%] h-[45px] bg-black border-[1px] border-white text-white px-2 rounded-lg`} onChange={handleEmailAddress} />
                 </div>
                 <div className={`lg:w-[50%] h-full flex xs:w-full`}>
                     <div className={`lg:w-[50%] h-full xs:w-full`}>
@@ -106,7 +182,11 @@ function Popup({ destination, image }: Props) {
                 </div>
             </div>
             <div className={`w-full h-[5rem] flex items-center justify-center lg:pl-[5rem] lg:my-0 xs:my-[3rem]`}>
-                <button className={`lg:w-[15rem] h-[3rem] bg-[#2282f0] font-bold text-white rounded-lg lg:mx-3 xs:w-[10rem] hover:scale-[110%] ease-in-out duration-[200ms] cursor-pointer`}>Book Flight</button>
+                {/* <button className={`lg:w-[15rem] h-[3rem] bg-[#2282f0] font-bold text-white rounded-lg lg:mx-3 xs:w-[10rem] hover:scale-[110%] ease-in-out duration-[200ms] cursor-pointer`}>Book Flight</button> */}
+                {paid ? <button className={`lg:w-[15rem] h-[3rem] bg-[#2282f0] font-bold text-white rounded-lg lg:mx-3 xs:w-[10rem] hover:scale-[110%] ease-in-out duration-[200ms] cursor-pointer`}>Payment Successful</button>
+                    :
+                    <button className={`lg:w-[15rem] h-[3rem] bg-[#2282f0] font-bold text-white rounded-lg lg:mx-3 xs:w-[10rem] hover:scale-[110%] ease-in-out duration-[200ms] cursor-pointer`} onClick={handleWeb3}>Book Flight</button>
+                }
             </div>
         </div>
     )
