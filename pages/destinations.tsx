@@ -4,6 +4,9 @@ import styles from '../styles/destinations.module.css'
 import { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import Menu from '../components/Menu'
+import Popup from '../components/Popup'
+import { useDispatch, useSelector } from 'react-redux'
+import { activatePopup, deactivatePopup, setPlanet } from "../components/reducers/action"
 
 
 const Destinations: NextPage = () => {
@@ -16,7 +19,7 @@ const Destinations: NextPage = () => {
     const [europaEffect, setEuropaEffect] = useState(inactive)
     const [titanEffect, setTitanEffect] = useState(inactive)
 
-    
+
 
 
     const [image, setImage] = useState("");
@@ -78,6 +81,7 @@ const Destinations: NextPage = () => {
         const _averageDist = "628 mil. km";
 
         const _estTravelTime = "3 years";
+
         setImage(_image);
         setDestination(_destination);
         setDestDescription(_destDesctiption);
@@ -97,6 +101,7 @@ const Destinations: NextPage = () => {
             "The only moon known to have a dense atmosphere other than Earth, Titan is a home away from home (just a few hundred degrees colder!). As a bonus, you get striking views of the Rings of Saturn.";
         const _averageDist = "1.6 bil. km";
         const _estTravelTime = "7 years";
+
         setImage(_image);
         setDestination(_destination);
         setDestDescription(_destDesctiption);
@@ -111,34 +116,46 @@ const Destinations: NextPage = () => {
 
     // let _place: string = "destinations"
 
+    const popupState = useSelector((state: any) => state.popupState)
+
+
+    const dispatch = useDispatch()
+
+    function handlePopupState() {
+        dispatch(setPlanet(image))
+        dispatch(activatePopup())
+        console.log(image)
+    }
+
     return (
-        <div className={` h-[100vh] w-[100vw] font-opensans flex flex-col justify-end items-center  ${styles.destinations_main}`}>
+        <div className={` h-[100vh] w-[100vw] font-opensans flex flex-col justify-end items-center relative  ${styles.destinations_main}`}>
             <Head>
                 <title>Solaris | Destinations</title>
                 <meta name="description" content="Solaris: CodeByDolapo" />
                 <link rel="icon" href="/icons/logo.png" />
             </Head>
-            <Navbar place = {"destinations"}/>
-            <Menu/>
+            <Navbar place={"destinations"} />
+            <Menu />
+            {popupState && <Popup destination = {destination} image = {image}/>}
             <div className={`w-[100%] h-[80vh] text-white flex lg:flex-row items-center lg:justify-center mt-[10vh] md:pt-[5rem] xs:flex-col xs:overflow-y-scroll overflow-x-hidden`}>
                 <div className="lg:w-[40%] lg:h-full flex justify-around items-center flex-col xs:w-[100%] xs:min-h-[60vh]">
-                    <h3 className = {`text-white w-[350px] uppercase text-xl tracking-[1px] md:my-5`}>01 Pick Your Destination</h3>
+                    <h3 className={`text-white w-[350px] uppercase text-xl tracking-[1px] md:my-5`}>01 Pick Your Destination</h3>
                     <img className={`lg:w-[35vw] lg:h-[35vw] xs:w-[90vw] xs:h-[90vw] ${styles.planet}`} src={image} alt='' />
                 </div>
 
                 <div className={`lg:w-[60%] h-full text-white flex flex-col items-center justify-around lg:mt-0 md:my-[5rem] xs:w-[100vw] xs:mt-[3rem]`}>
                     <div className={`w-[95%] flex flex-row justify-around items-center`}>
-                        <div className={moonEffect}  onClick={switchToMoon}>
-                            <h1 className = {`uppercase text-white text-[1rem]`}>Moon</h1>
+                        <div className={moonEffect} onClick={switchToMoon}>
+                            <h1 className={`uppercase text-white text-[1rem]`}>Moon</h1>
                         </div>
                         <div className={marsEffect} onClick={switchToMars}>
-                            <h1 className = {`uppercase text-white text-[1rem]`} >Mars</h1>
+                            <h1 className={`uppercase text-white text-[1rem]`} >Mars</h1>
                         </div>
                         <div className={europaEffect} onClick={switchToEuropa}>
-                            <h1 className = {`uppercase text-white text-[1rem]`} >Europa</h1>
+                            <h1 className={`uppercase text-white text-[1rem]`} >Europa</h1>
                         </div>
                         <div className={titanEffect} onClick={switchToTitan}>
-                            <h1 className = {`uppercase text-white text-[1rem]`} >Titan</h1>
+                            <h1 className={`uppercase text-white text-[1rem]`} >Titan</h1>
                         </div>
                     </div>
 
@@ -150,18 +167,18 @@ const Destinations: NextPage = () => {
 
                     <div className={`lg:w-[90%] flex justify-between items-center uppercase lg:px-0 lg:mt-0 xs:mt-[2rem] xs:w-[100%] xs:px-2`}>
                         <div className={`flex flex-col justify-center items-center`}>
-                            <h3 className = {`lg:text-sm mb-[1rem] xs:text-xs`} >avg distance</h3>
+                            <h3 className={`lg:text-sm mb-[1rem] xs:text-xs`} >avg distance</h3>
                             <h1 className={`lg:text-5xl uppercase tracking-[5px] xs:text-xl`}>{averageDist}</h1>
                         </div>
 
                         <div className={`flex flex-col justify-center items-center`}>
-                            <h3 className = {`lg:text-sm mb-[1rem] xs:text-xs`}>est travel time</h3>
+                            <h3 className={`lg:text-sm mb-[1rem] xs:text-xs`}>est travel time</h3>
                             <h1 className={`lg:text-5xl uppercase tracking-[5px] xs:text-xl`}>{estTravelTime}</h1>
                         </div>
                     </div>
-                    <div className = {`w-full h-[4rem] flex items-center lg:justify-start lg:px-5 lg:my-0 xs:my-[2rem] xs:justify-around`}>
-                        <button className = {`lg:w-[15rem] h-[3rem] bg-[#2282f0] font-bold text-white rounded-lg lg:mx-3 xs:w-[10rem] hover:scale-[110%] ease-in-out duration-[200ms] cursor-pointer`}>Book Flight</button>
-                        <button className = {`lg:w-[15rem] h-[3rem] bg-white font-bold text-[#313131] rounded-lg lg:mx-5 xs:w-[10rem] hover:scale-[110%] ease-in-out duration-[200ms] cursor-pointer`}>More Details</button>
+                    <div className={`w-full h-[4rem] flex items-center lg:justify-start lg:px-5 lg:my-0 xs:my-[2rem] xs:justify-around`}>
+                        <button className={`lg:w-[15rem] h-[3rem] bg-[#2282f0] font-bold text-white rounded-lg lg:mx-3 xs:w-[10rem] hover:scale-[110%] ease-in-out duration-[200ms] cursor-pointer`}>Book Flight</button>
+                        <button className={`lg:w-[15rem] h-[3rem] bg-white font-bold text-[#313131] rounded-lg lg:mx-5 xs:w-[10rem] hover:scale-[110%] ease-in-out duration-[200ms] cursor-pointer`} onClick={handlePopupState}>More Details</button>
                     </div>
                 </div>
             </div>
