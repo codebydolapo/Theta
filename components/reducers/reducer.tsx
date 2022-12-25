@@ -41,19 +41,12 @@ export const account = (state = "", action: {type: string, account: string})=>{
     }
 }
 
-export const contract = (state = [], action: {type: string, contract: any})=>{
-    switch(action.type){
-        case "SAVE_CONTRACT":
-            return state = action.contract;
-        default:
-            return []
-    }
-}
+
 
 export const allReducers = combineReducers({
     hamburgerState,
     popupState,
     planet,
     account,
-    contract
+    
 })

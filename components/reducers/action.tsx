@@ -34,3 +34,10 @@ export const saveContract = (contract: any)=>{
         contract
     }
 }
+
+export const _setDestination = (destination: string)=>{
+    return{
+        type: "SET_DESTINATION",
+        destination
+    }
+}

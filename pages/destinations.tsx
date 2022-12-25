@@ -4,16 +4,13 @@ import styles from '../styles/destinations.module.css'
 import { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import Menu from '../components/Menu'
-import Popup from '../components/Popup'
 import { useDispatch, useSelector } from 'react-redux'
-import { activatePopup, deactivatePopup, setPlanet } from "../components/reducers/action"
-import { ethers } from 'ethers'
-import { saveAccount, saveContract } from '../components/reducers/action'
-import { solarisAddress } from '../src/solarisAddress'
-import solarisABI from '../artifacts/contracts/Solaris.sol/Solaris.json'
-
+import {  _setDestination } from "../components/reducers/action"
+import { useRouter } from 'next/router'
 
 const Destinations: NextPage = () => {
+    const dispatch = useDispatch()
+    const router = useRouter()
 
     const active = "w-[20%] h-[2.5rem] flex items-center justify-center cursor-pointer border-b-2 border-[#2282f0]"
     const inactive = "w-[20%] h-[2.5rem] flex items-center justify-center cursor-pointer hover:border-b-2 hover:border-[#ffffff80]"
@@ -24,16 +21,11 @@ const Destinations: NextPage = () => {
     const [titanEffect, setTitanEffect] = useState(inactive)
 
 
-
-
     const [image, setImage] = useState("");
     const [destination, setDestination] = useState("");
     const [destDescription, setDestDescription] = useState("");
     const [averageDist, setAverageDist] = useState("");
     const [estTravelTime, setEstTravelTime] = useState("");
-
-    const [price, setPrice] = useState("")
-    const [paid, setPaid] = useState(false)
 
     function switchToMoon() {
         const _image = "/images/destination/image-moon.webp"
@@ -45,17 +37,21 @@ const Destinations: NextPage = () => {
 
         const price = "0.02"
 
+
         setImage(_image)
         setDestination(_destination)
         setDestDescription(_destDesctiption)
         setAverageDist(_averageDist)
         setEstTravelTime(_estTravelTime)
-        setPrice(price)
+        
 
         setMoonEffect(active)
         setMarsEffect(inactive)
         setEuropaEffect(inactive)
         setTitanEffect(inactive)
+
+        dispatch(_setDestination(_destination))
+
     }
 
     useEffect(() => {
@@ -78,13 +74,16 @@ const Destinations: NextPage = () => {
         setDestDescription(_destDesctiption);
         setAverageDist(_averageDist);
         setEstTravelTime(_estTravelTime);
-        setPrice(price)
+        
 
 
         setMoonEffect(inactive)
         setMarsEffect(active)
         setEuropaEffect(inactive)
         setTitanEffect(inactive)
+
+        dispatch(_setDestination(_destination))
+
     }
 
     function switchToEuropa() {
@@ -103,13 +102,16 @@ const Destinations: NextPage = () => {
         setDestDescription(_destDesctiption);
         setAverageDist(_averageDist);
         setEstTravelTime(_estTravelTime);
-        setPrice(price)
+        
 
 
         setMoonEffect(inactive)
         setMarsEffect(inactive)
         setEuropaEffect(active)
         setTitanEffect(inactive)
+
+        dispatch(_setDestination(_destination))
+
     }
 
     function switchToTitan() {
@@ -127,83 +129,21 @@ const Destinations: NextPage = () => {
         setDestDescription(_destDesctiption);
         setAverageDist(_averageDist);
         setEstTravelTime(_estTravelTime);
-        setPrice(price)
+        
 
 
         setMoonEffect(inactive)
         setMarsEffect(inactive)
         setEuropaEffect(inactive)
         setTitanEffect(active)
+
+        dispatch(_setDestination(_destination))
+
     }
 
-    // let _place: string = "destinations"
-
-    const popupState = useSelector((state: any) => state.popupState)
-
-
-    function handlePopupState() {
-        dispatch(setPlanet(image))
-        dispatch(activatePopup())
-    }
-
-    const dispatch = useDispatch()
-
-    const [connectSwitch, setconnectSwitch] = useState(false)
-    // const [account, setAccount] = useState("")
-
-    useEffect(() => {
-        let Window: any = window
-        if (connectSwitch && Window.ethereum !== undefined) {
-            // setAccount("")
-            dispatch(saveAccount(""))
-            dispatch(saveContract(null))
-
-            let provider = Window.ethereum
-            let ethersProvider = new ethers.providers.Web3Provider(provider);
-
-            Window.ethereum.request({ method: "eth_requestAccounts" })
-                .then((accounts: any) => {
-                    // setAccount(accounts[0])
-                    dispatch(saveAccount(accounts[0]))
-                    console.log(accounts[0])
-                })
-                .catch((err: any) => console.log(err))
-
-            let signer = ethersProvider.getSigner()
-
-            const solaris: any | undefined = new ethers.Contract(solarisAddress, solarisABI.abi, signer)
-
-
-            if (solaris) {
-                dispatch(saveContract(solaris))
-            }
-
-        } else if (connectSwitch && Window.ethereum == undefined) {
-            alert("Please Download Metamask")
-        }
-        setconnectSwitch(false)
-    }, [connectSwitch])
-
-    const solaris = useSelector((state: any)=>{
-        return state.contract
-    })
-
-    const account = useSelector((state: any)=>{
-        return state.account
-    })
-
-    async function handleWeb3() {
-        if(account){
-            const paymentReceipt = await solaris.connect(account).acceptPayment({value: ethers.utils.parseUnits(price, "ether")})
-            if(paymentReceipt.hash){
-                setPaid(true)
-            }
-        } else{
-            setconnectSwitch(true)
-            await solaris.connect(account).acceptPayment({value: ethers.utils.parseUnits(price, "ether")})
-
-        }
-
+    function handlePopupState(e: any) {
+        e.preventDefault()
+        router.push(`/destination/${destination}`)
     }
 
     return (
@@ -215,7 +155,6 @@ const Destinations: NextPage = () => {
             </Head>
             <Navbar place={"destinations"} />
             <Menu />
-            {true && <Popup destination={destination} image={image} />}
             <div className={`w-[100%] h-[80vh] text-white flex lg:flex-row items-center lg:justify-center mt-[10vh] md:pt-[5rem] xs:flex-col xs:overflow-y-scroll overflow-x-hidden`}>
                 <div className="lg:w-[40%] lg:h-full flex justify-around items-center flex-col xs:w-[100%] xs:min-h-[60vh]">
                     <h3 className={`text-white w-[350px] uppercase text-xl tracking-[1px] md:my-5`}>01 Pick Your Destination</h3>
@@ -256,10 +195,6 @@ const Destinations: NextPage = () => {
                         </div>
                     </div>
                     <div className={`w-full h-[4rem] flex items-center lg:justify-start lg:px-5 lg:my-0 xs:my-[2rem] xs:justify-around`}>
-                        {/* {paid ? <button className={`lg:w-[15rem] h-[3rem] bg-[#2282f0] font-bold text-white rounded-lg lg:mx-3 xs:w-[10rem] hover:scale-[110%] ease-in-out duration-[200ms] cursor-pointer`}>Payment Successful</button>
-                        :
-                        <button className={`lg:w-[15rem] h-[3rem] bg-[#2282f0] font-bold text-white rounded-lg lg:mx-3 xs:w-[10rem] hover:scale-[110%] ease-in-out duration-[200ms] cursor-pointer`}onClick = {handleWeb3}>Book Flight</button>
-                        } */}
                         <button className={`lg:w-[15rem] h-[3rem] bg-white font-bold text-[#313131] rounded-lg lg:mx-5 xs:w-[10rem] hover:scale-[110%] ease-in-out duration-[200ms] cursor-pointer`} onClick={handlePopupState}>More Details</button>
                     </div>
                 </div>

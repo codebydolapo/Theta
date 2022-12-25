@@ -5,11 +5,7 @@ import styles from '../styles/technology.module.css'
 import Navbar from '../components/Navbar'
 import { useEffect, useState } from 'react'
 import Menu from '../components/Menu'
-import { useDispatch, useSelector } from 'react-redux'
-import { ethers } from 'ethers'
-import { saveAccount, saveContract } from '../components/reducers/action'
-import { solarisAddress } from '../src/solarisAddress'
-import solarisABI from '../artifacts/contracts/Solaris.sol/Solaris.json'
+
 
 
 const Technology: NextPage = () => {
