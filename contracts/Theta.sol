@@ -46,8 +46,8 @@ contract Theta{
     modifier moreThanZero(uint256 amount){
         if(amount == 0){
             revert Theta__NeedsMoreThanZero();
-            _;
         }
+            _;
     }
 
     constructor(address stakingToken, address rewardToken){
@@ -62,21 +62,22 @@ contract Theta{
         return s_rewardPerTokenStored + (((block.timestamp - s_lastUpdateTime) * REWARD_RATE * 1e18)/ s_totalSupply);
     }
 
+    //Returns the earned amount of each staker
     function earned(address account) public view returns(uint256){
         uint256 currentBalance = s_balances[account];
         uint256 amountPaid = s_userRewardPerTokenPaid[account];
         uint256 currentRewardPerToken = rewardPerToken();
         uint256 pastRewards = s_rewards[account];
 
-        uint256 earned = (currentBalance * (currentRewardPerToken - amountPaid)/1e18) + pastRewards;
-        return earned;
+        uint256 _earned = (currentBalance * (currentRewardPerToken - amountPaid)/1e18) + pastRewards;
+        return _earned;
     }
 
-    function stake(uint256 amount) updateReward(msg.sender) moreThanZero(amount) external{
-        s_totalSupply += amount;
-        s_balances[msg.sender] += amount;
-        emit tokensStaked(msg.sender, amount);
-        bool success = s_stakingToken.transferFrom(msg.sender, address(this), amount);
+    function stake(uint256 _amount) external updateReward(msg.sender) moreThanZero(_amount) {
+        s_balances[msg.sender] = s_balances[msg.sender] + _amount;
+        s_totalSupply = s_totalSupply + _amount;
+        emit tokensStaked(msg.sender, _amount);
+        bool success = s_stakingToken.transferFrom(msg.sender, address(this), _amount);
         if(!success){
             revert Theta__transferFailed();
         }
