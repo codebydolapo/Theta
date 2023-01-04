@@ -1,12 +1,15 @@
 /*HOMEPAGE BEGINS HERE*/
 .home_main {
-  /* background: url("/images/home/background-home-desktop.jpg") no-repeat center
-    center fixed; */
-  background: url("/images/home/background.jpg") no-repeat center center fixed;
+  background: url("/images/bg.jpg") no-repeat center center fixed;
   background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   -webkit-background-size: cover;
-  font-family: "Open Sans", "Courier New", Courier, monospace;
+  /* font-family: "Open Sans", "Courier New", Courier, monospace; */
+}
+
+.backdrop{
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 

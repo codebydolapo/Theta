@@ -73,6 +73,7 @@ contract Theta{
         return _earned;
     }
 
+    //allows customers to stake
     function stake(uint256 _amount) external updateReward(msg.sender) moreThanZero(_amount) {
         s_balances[msg.sender] = s_balances[msg.sender] + _amount;
         s_totalSupply = s_totalSupply + _amount;
@@ -83,6 +84,7 @@ contract Theta{
         }
     }
 
+    //allows stakers to withdraw their earnings
     function withdraw(uint256 amount) updateReward(msg.sender) external {
         s_balances[msg.sender] = s_balances[msg.sender] - amount;
         s_totalSupply = s_totalSupply - amount;
@@ -92,6 +94,7 @@ contract Theta{
         }
     }
 
+    //allows users to claim their rewards after staking
     function claimReward() external updateReward(msg.sender){
         uint256 reward = s_rewards[msg.sender];
         bool success = s_stakingToken.transfer(msg.sender, reward);

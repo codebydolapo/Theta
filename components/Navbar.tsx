@@ -1,121 +1,33 @@
-import styles from '../styles/navbar.module.css'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { activateHamburger, deactivateHamburger } from "./reducers/action"
+import { HomeIcon, ChartBarIcon, UserGroupIcon, } from "@heroicons/react/outline"
 
 //fill="#0B0D17"
 
-function Navbar({place}: {place: string}) {
+function Navbar() {
 
-    const active = "h-[90%] w-[20%] flex items-center justify-center border-b-[3px] border-b-[#2282f0] cursor-pointer"
-    const inactive = "h-[90%] w-[20%] flex items-center justify-center hover:border-b-[3px] hover:border-b-[#fff] cursor-pointer"
 
-    const [homeEffect, setHomeEffect] = useState(inactive)
-    const [destinationsEffect, setDestinationsEffect] = useState(inactive)
-    const [crewEffect, setCrewEffect] = useState(inactive)
-    const [TechnologyEffect, setTechnologyEffect] = useState(inactive)
-
-    let _place: string
-    
-    useEffect(()=>{
-        _place = place
-    }, [])
-
-    useEffect(()=>{
-        if(_place == "home"){
-            setHomeEffect(active)
-            setDestinationsEffect(inactive)
-            setCrewEffect(inactive)
-            setTechnologyEffect(inactive)
-        }
-        else if(_place == "destinations"){
-            setHomeEffect(inactive)
-            setDestinationsEffect(active)
-            setCrewEffect(inactive)
-            setTechnologyEffect(inactive)
-        } else  if(_place == "crew"){
-            setHomeEffect(inactive)
-            setDestinationsEffect(inactive)
-            setCrewEffect(active)
-            setTechnologyEffect(inactive)
-        } else if(_place == "technology"){
-            setHomeEffect(inactive)
-            setDestinationsEffect(inactive)
-            setCrewEffect(inactive)
-            setTechnologyEffect(active)
-        }
-    }, [])
-
-    interface HamburgerState {
-        hamburgerState: boolean
-    }
-
-    const hamburgerState = useSelector((state: HamburgerState) => state.hamburgerState)
-
-    const dispatch = useDispatch()
-
-    function handleBurgerState() {
-        if (hamburgerState == false) {
-            dispatch(activateHamburger())
-        } else if (hamburgerState == true) {
-            dispatch(deactivateHamburger())
-        }
-    }
 
     return (
-        <div className={` w-[100vw] h-[6rem] flex flex-row items-center justify-between lg:px-[20px] fixed top-0`}>
-            <div className={`lg:w-[20%] h-full flex items-center lg:justify-around lg:px-0 xs:px-3 xs:justify-start xs:w-[30%]`}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="47" height="47">
-                    <g fill="none" fillRule="evenodd">
-                        <circle cx="24" cy="24" r="24" fill="#FFF" />
-                        <path
-                            fill="#000"
-                            d="M24 0c0 16-8 24-24 24 15.718.114 23.718 8.114 24 24 0-16 8-24 24-24-16 0-24-8-24-24z"
-                        />
-                    </g>
-                </svg>
-                <h1 className={`text-white lg:text-5xl font-bold font-times uppercase xs:text-[0rem]`}>Solaris</h1>
+        <div className={`w-[100vw] h-[4rem] flex flex-row items-center justify-between`}>
+            <div className={`w-[20%] h-full flex items-end justify-start`}>
+                {/* <img className={`w-[3.5rem] h-[3.5rem] rounded-full mx-3`} src='/icons/theta.png' alt='' /> */}
+                <h1 className={`text-[#1da1f2] font-[1000] text-[2.5rem] font-opensans mx-5`}>THE<b className={`text-white`}>TA</b></h1>
             </div>
-            <div className={`lg:w-[60%] h-[80%] flex flex-row lg:justify-around items-center lg:bg-[#ffffff1a] xs:bg-0 md:px-[30px] xs:w-[70%] rounded-lg xs:justify-end  ${styles.navBar}`}>
-                <Link href={`/`}>
-                    <div className={homeEffect} >
-                        <div className={`text-white lg:text-sm uppercase font-light tracking-[1px] xs:text-[0rem] `}>
-                            <b >00</b> Home
-                        </div>
-                    </div>
-                </Link>
-                <Link href={`/destinations`}>
-                    <div className={destinationsEffect}>
-                        <div className={`text-white lg:text-sm uppercase font-light tracking-[1px] xs:text-[0rem]`} >
-                            <b>01</b> Destinations
-                        </div>
-                    </div>
-                </Link>
-
-                <Link href={`/crew`}>
-                    <div className={crewEffect}>
-                        <div className={`text-white lg:text-sm uppercase font-light tracking-[1px] xs:text-[0rem]`} >
-                            <b>02</b> Crew
-                        </div>
-                    </div>
-                </Link>
-
-                <Link href={`/technology`}>
-                    <div className={TechnologyEffect}>
-                        <div className={`text-white lg:text-sm uppercase font-light tracking-[1px] xs:text-[0rem]`}>
-                            <b>03</b> Technology
-                        </div>
-                    </div>
-                </Link>
-
-                <div className={`lg:w-[0rem] lg:h-0 lg:px-0 xs:px-3 flex flex-row justify-end items-center xs:w-full xs:h-full`}>
-                    {/* <button className={`md:w-0 md:h-0 md:text-[0rem] text-white mx-5 bg-[#1877f2] md:rounded-xl xs:rounded-lg xs:h-[2rem] xs:text-[0.7rem] xs:w-[8rem] `}>Connect wallet</button> */}
-                    <div className={`${styles.hamburger}`} onClick={handleBurgerState}>
-                        <div className={`${styles.line}`} id={`${hamburgerState && styles.line1}`}></div>
-                        <div className={`${styles.middleLine}`} id={`${hamburgerState && styles.line2}`}></div>
-                        <div className={`${styles.line}`} id={`${hamburgerState && styles.line3}`}></div>
-                    </div>
+            <div className={`w-[65%] h-full flex items-center justify-center`}>
+                <div className={`w-[8rem] h-full flex flex-col items-center justify-end mx-[5rem] cursor-pointer`}>
+                    <UserGroupIcon className={`text-white w-[2rem] my-[3px]`} />
+                    <h1 className={`text-white text-xs`}>DAO</h1>                </div>
+                <div className={`w-[8rem] h-full border-b-2 border-[#1da1f2] flex flex-col items-center justify-end mx-[5rem] cursor-pointer`}>
+                    <HomeIcon className={`text-white w-[2rem] my-[3px]`} />
+                    <h1 className={`text-white text-xs`}>Home</h1>
+                </div>
+                <div className={`w-[8rem] h-full flex flex-col items-center justify-end mx-[5rem] cursor-pointer`}>
+                    <ChartBarIcon className={`text-white w-[2rem] my-[3px]`} />
+                    <h1 className={`text-white text-xs`}>Analytics</h1>                </div>
+            </div>
+            <div className={`w-[15%] h-full flex items-center justify-center`}>
+                <div className={`w-[90%] h-[2.5rem] rounded-lg bg-[#1da1f2] flex items-center justify-center cursor-pointer hover:scale-[105%] ease-in-out duration-[200ms]`}>
+                    <img className={`w-[1.5rem] h-[1.5rem] rounded-full mx-2`} src={`/icons/twitterIcon.png`} alt='' />
+                    <h1 className={`text-white font-bold text-base`}>Join Twitter</h1>
                 </div>
             </div>
         </div>
